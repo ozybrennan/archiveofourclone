@@ -1,0 +1,15 @@
+.superclass{
+  position: absolute;
+}
+
+.column-1{
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.column-2{
+  position: relative;
+  left: 100px;
+  top: 0;
+}

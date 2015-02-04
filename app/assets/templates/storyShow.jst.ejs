@@ -1,0 +1,39 @@
+<section class="fact-box">
+  <div class="superclass">
+    <div class="column-1">
+      Stats:
+    </div>
+    <div class="column-2">
+      Published: <% var date = new Date(story.escape("created_at")) %>
+      <%= moment(date).format("YYYY[-]MM[-]D") %>
+      Words: <%= story.escape("word_count") %>
+    </div>
+  </div>
+</section>
+<section class="title">
+  <h1><%= story.escape("title") %></h1>
+</section>
+<aside class="summary">
+  <% if (story.escape("summary")) { %>
+    <div class="on-top-of-line">
+      <h4>Summary:</h4>
+    </div>
+    <div class="below-line">
+      <%= story.escape("summary") %>
+    </div>
+  <% } %>
+</aside>
+<aside class="notes">
+  <% if (story.escape("notes")) { %>
+    <div class="on-top-of-line">
+      <h4>Notes:</h4>
+    </div>
+    <div class="below-line">
+      <%= story.escape("notes") %>
+    </div>
+  <% } %>
+</aside>
+<article>
+  <%= story.escape("text") %>
+</article>
+<button class="top">Top</button>

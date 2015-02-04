@@ -1,0 +1,15 @@
+<div class="index-item-name">
+  <a href="javascript:void(0)" class="main-link index-title" data-id="<%= story.escape("id") %>">
+    <%=story.escape("title") %>
+  </a>
+</div>
+<div class="small-date">
+  <% var date = new Date(story.escape("updated_at")) %>
+  <%= moment(date).format("D MMM YYYY") %>
+</div>
+<div class="summary">
+  <%= story.escape("summary") %>
+</div>
+<div class="stats">
+  Words: <%= story.escape("word_count") %>
+</div>

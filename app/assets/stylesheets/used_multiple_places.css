@@ -1,0 +1,21 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+
+#main {
+  width: 1000px;
+  margin: 0 auto;
+  background: #FFFFFF;
+}
+
+.fact-box {
+  border: 1px solid #E9E9E9;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.main-link {
+  color: #930101;
+}
