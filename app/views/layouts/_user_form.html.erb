@@ -1,0 +1,27 @@
+<% button_message = signup ? "Sign Up" : "Sign In" %>
+<% action_path = signup ? users_url : sessions_url %>
+<% error_message = signup ? "sign you up" : "log you in" %>
+
+<% if flash[:errors] %>
+  <div id="errors">
+    Sorry! We couldn't <%= error_message %> because:
+    <ul>
+    <% flash[:errors].each do |error| %>
+      <li>
+      <%= error %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="user-form">
+  <form action="<%= action_path %>" method="POST">
+    <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="user[username]" value="<%= @user.username %>">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="user[password]">
+    <input type="submit" value="<%= button_message %>">
+  </form>
+</div>
