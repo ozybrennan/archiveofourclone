@@ -4,6 +4,9 @@
     }
 } %>
 
+<% var tagField = function (tag_name) {
+  return "<div id='" + tag_name + "'></div>"
+} %>
 
 <input type="submit" value="sort and filter">
 <p>
@@ -15,7 +18,12 @@
   <option value="author_name" <%= selected("author_name") %>>Author</option>
 </select>
 <p>
-<label for="Author">Author</label>
-<input type="text" name="tags[author]">
+<label for="author_name">Author</label><br />
+<%= tagField("author_name") %>
+<input type="text" name="tags[author_name]" id="author_name">
+<p>
+<label for="fandom_name">Fandom</label><br />
+<%= tagField("fandom_name") %>
+<input type="text" name="tags[fandom_name]" id="fandom_name">
 <p>
 <input type="submit" value="sort and filter">

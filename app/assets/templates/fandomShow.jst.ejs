@@ -1,0 +1,16 @@
+<%= category.category_name %>
+<% for (var i = 0; i < alphabet.length; i++) { %>
+  <div class="fandom-box">
+    <% var letter = alphabet[i] %>
+    <%= letter %> <button class="top">Top</button>
+    <% for (var j = 0; j < category.fandom.length; j++) { %>
+      <% var fandom = category.fandom[j] %>
+      <% if (fandom.name[0] === letter) { %>
+        <a href="javascript:void(0)" class="fandom-list-name">
+          <%= fandom.name %>
+        </a>
+        (<%= fandom.story_count %>)
+      <% } %>
+    <% } %>
+  </div>
+<% } %>

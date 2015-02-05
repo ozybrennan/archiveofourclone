@@ -11,9 +11,11 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
     'stories/:id': 'storyShow',
     'users': 'userIndex',
     'users/:id': 'userShow',
+    'fandoms': 'categoryIndex',
+    'fandoms/:name': 'categoryShow',
   },
 
-  baseStoryIndex: function(collection) {
+  baseStoryIndex: function() {
     ArchiveOfOurClone.Collections.baseCollection.fetch({
         success: this._storyIndex.bind(this),
       });
@@ -29,7 +31,7 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
     var models = ArchiveOfOurClone.Collections.baseCollection.models;
     var collection = new ArchiveOfOurClone.Collections.Stories(models,
       { comparator: sortCriterion, tags: tags })
-    this._storyIndex(collection)
+      this._storyIndex(collection)
   },
 
   userIndex: function(){
@@ -48,6 +50,33 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
         this._swapViews(view);
       }.bind(this),
     })
+  },
+
+  categoryIndex: function() {
+    var collection = new ArchiveOfOurClone.Collections.Categories()
+    collection.fetch({
+      success: function () {
+        var view = new ArchiveOfOurClone.Views.fandomIndex({collection: collection})
+        this._swapViews(view);
+      }.bind(this)
+    });
+  },
+
+  categoryShow: function(name) {
+    var collection = new ArchiveOfOurClone.Collections.Categories()
+    collection.fetch({
+      success: function () {
+        var categories = collection.models[0].get("categories")
+        _(categories).each(function(category){
+          var categoryName = category.category_name.toLowerCase().replace(" ", "_")
+          if (name === categoryName) {
+            shownCategory = category;
+          }
+        });
+        var view = new ArchiveOfOurClone.Views.fandomShow({model: shownCategory})
+        this._swapViews(view);
+      }.bind(this)
+    });
   },
 
   _swapViews: function(view) {

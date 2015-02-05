@@ -1,0 +1,12 @@
+<a href="javascript:void(0)" class="category-list-name"><%= category.category_name %></a>
+<div class="fandom-list">
+  <% var length = category.fandom.length < 5 ? category.fandom.length : 5 %>
+  <% for (var i = 0; i < length; i++) { %>
+    <% var fandom = category.fandom[i] %>
+    <a href="javascript:void(0) class="fandom-list-name">
+      <%= fandom.name %>
+    </a>
+      (<%= fandom.story_count %>)
+    <p>
+  <% } %>
+</div>

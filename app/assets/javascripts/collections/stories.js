@@ -5,10 +5,7 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
 
   initialize: function(models, options) {
     if (options && options.tags) {
-      var tags = this.parseTags(options.tags);
-      _(attributes.tags).each(function(tag, type){
-        this.filterCollection(tag, type);
-      }.bind(this));
+      this.tags = this.parseTags(options.tags);
     }
   },
 
@@ -33,12 +30,36 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
     return this.comparator;
   },
 
-  filterCollection: function(tag, type){
+  filterByTag: function(tags, type){
     var iteration_collection = this.clone();
+    var that = this;
     iteration_collection.each(function(model){
-      if (model.get(type) !== tag) {
-        this.remove(model);
+      _(tags).each(function(tag){
+        if (model.get(type) !== tag) {
+          that.remove(model);
+        }
+      });
+    });
+  },
+
+  parseTags: function(tags_string){
+    var tags_arr = tags_string.split("/");
+    var tags = {}
+    for (var i = 0; i < tags_arr.length; i += 2) {
+      var type = tags_arr[i]
+      var tag = tags_arr[i + 1]
+      if (tags[type]) {
+        tags[type].push(tag)
+      } else {
+        tags[type] = [tag]
       }
+    }
+    return tags;
+  },
+
+  filterCollection: function () {
+    _(this.tags).each(function(tags, type){
+      this.filterByTag(tags, type);
     }.bind(this));
   },
 
