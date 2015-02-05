@@ -9,3 +9,8 @@ json.fandom do
   json.name story.fandom.name
   json.id story.fandom.id
 end
+
+json.tags story.tags do |tag|
+  json.label tag.label
+  json.category tag.category
+end

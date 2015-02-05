@@ -7,6 +7,9 @@ class Story < ActiveRecord::Base
   belongs_to :user
   belongs_to :fandom
 
+  has_many :taggings
+  has_many :tags, through: :taggings
+
   private
 
     def generate_word_count
