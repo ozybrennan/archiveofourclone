@@ -5,9 +5,10 @@ window.ArchiveOfOurClone = {
   Routers: {},
   Utils: {},
   initialize: function() {
-    new ArchiveOfOurClone.Collections.Stories().fetch({
+    ArchiveOfOurClone.Collections.baseCollection = new ArchiveOfOurClone.Collections.Stories()
+    ArchiveOfOurClone.Collections.baseCollection.fetch({
       success: function(collection) {
-        new ArchiveOfOurClone.Routers.Router({$rootEl: $("#main"), collection: collection})
+        ArchiveOfOurClone.Routers.router = new ArchiveOfOurClone.Routers.Router({$rootEl: $("#main"), collection: collection})
         Backbone.history.start();
       }
     });

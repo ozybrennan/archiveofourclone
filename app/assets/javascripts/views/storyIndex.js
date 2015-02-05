@@ -8,7 +8,7 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
       this.addSubview(".story-index", indexItem);
     }.bind(this));
 
-    var sidebar = new ArchiveOfOurClone.Views.searchSidebar()
+    var sidebar = new ArchiveOfOurClone.Views.searchSidebar({ collection: this.collection })
     this.addSubview(".search", sidebar)
   },
 

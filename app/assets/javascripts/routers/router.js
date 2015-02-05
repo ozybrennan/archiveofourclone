@@ -2,38 +2,52 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
 
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
-    this.collection = new ArchiveOfOurClone.Collections.Stories();
+    this.userCollection = new ArchiveOfOurClone.Collections.Users();
   },
 
   routes: {
-    '': 'storyIndex',
-    'search/:sortCriterion': 'storySearch',
+    '': 'baseStoryIndex',
+    'search/:sortCriterion/*tags': 'storySearch',
     'stories/:id': 'storyShow',
+    'users': 'userIndex',
+    'users/:id': 'userShow',
   },
 
-  storyIndex: function() {
-    this.collection.fetch({
-      success: function() {
-        var view = new ArchiveOfOurClone.Views.storyIndex({collection: this.collection})
-        this._swapViews(view);
-      }.bind(this),
-    });
+  baseStoryIndex: function(collection) {
+    ArchiveOfOurClone.Collections.baseCollection.fetch({
+        success: this._storyIndex.bind(this),
+      });
   },
 
   storyShow: function(id) {
-   var model = this.collection.getOrFetch(id);
+   var model = ArchiveOfOurClone.Collections.baseCollection.getOrFetch(id);
    var view = new ArchiveOfOurClone.Views.storyShow({model: model})
    this._swapViews(view);
   },
 
-  storySearch: function(sortCriterion) {
-    var collection = new ArchiveOfOurClone.Collections.Stories({}, { comparator: sortCriterion });
-    collection.fetch({
+  storySearch: function(sortCriterion, tags) {
+    var models = ArchiveOfOurClone.Collections.baseCollection.models;
+    var collection = new ArchiveOfOurClone.Collections.Stories(models,
+      { comparator: sortCriterion, tags: tags })
+    this._storyIndex(collection)
+  },
+
+  userIndex: function(){
+    this.userCollection.fetch({
       success: function() {
-        var view = new ArchiveOfOurClone.Views.storyIndex({collection: collection})
+        var view = new ArchiveOfOurClone.Views.userIndex({collection: this.userCollection})
         this._swapViews(view);
       }.bind(this),
     });
+  },
+
+  userShow: function(id) {
+    new ArchiveOfOurClone.Models.User({id: id}).fetch({
+      success: function(model) {
+        var view = new ArchiveOfOurClone.Views.userShow({model: model})
+        this._swapViews(view);
+      }.bind(this),
+    })
   },
 
   _swapViews: function(view) {
@@ -41,5 +55,10 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
     this.currentView = view;
     this.$rootEl.html(view.render().$el)
   },
+
+  _storyIndex: function (collection) {
+    var view = new ArchiveOfOurClone.Views.storyIndex({collection: collection})
+    this._swapViews(view);
+  }
 
 })

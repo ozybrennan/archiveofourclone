@@ -3,13 +3,13 @@ class UsersController < ApplicationController
   before_action :require_current_user, only: :destroy
 
   def index
-    @users = Users.all
-    render json: @users
+    @users = User.all
+    render :index
   end
 
   def show
-    @user = User.find(params[id])
-    render json: @user
+    @user = User.find(params[:id])
+    render :show
   end
 
   def new

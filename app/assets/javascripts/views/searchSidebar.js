@@ -1,4 +1,4 @@
-ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
+ArchiveOfOurClone.Views.searchSidebar = Backbone.SearchView.extend({
 
   template: JST['searchSidebar'],
 
@@ -9,16 +9,24 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
   },
 
   render: function(){
-    var content = this.template()
+    var content = this.template({search_default: this.collection.find_comparator()})
     this.$el.html(content);
     return this;
   },
 
-  submit: function(event) {
+  submit: function(){
     event.preventDefault();
     var attributes = $(event.currentTarget).serializeJSON();
-    var url = "search/" + attributes.sort_criterion
-    Backbone.history.navigate(url, { trigger: true })
+
+    var comparator = attributes.sort_criterion
+
+    var tags = ""
+    _(attributes.tags).each(function(tag, type){
+      tags = tags + "/" + tag + "/" + "type"
+    }.bind(this));
+
+    var url = "search/" + comparator + "/" + tags
+    Backbone.navigate(url, {trigger: true})
   },
 
 })

@@ -15,16 +15,15 @@
 }
 
 .index-item-name {
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
+  float: left;
+  width: 500px;
   font-size: large;
 }
 
 .small-date {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
+  float: right;
   font-size: small;
 }
 

@@ -4,6 +4,9 @@ class Story < ActiveRecord::Base
 
   after_initialize :generate_word_count
 
+  belongs_to :user
+  belongs_to :fandom
+
   private
 
     def generate_word_count

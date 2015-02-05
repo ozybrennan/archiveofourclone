@@ -5,9 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+20.times do
+  username = Faker::Internet.user_name
+  User.create(username: username, password: "password")
+end
+
 100.times do
   title = Faker::Lorem.sentence
   summary = Faker::Lorem.paragraph(rand(5))
   text = Faker::Lorem.paragraphs(rand(50)).join(" ")
-  Story.create({title: title, summary: summary, text: text})
+  user_id = rand(20) + 1
+  fandom_id = rand(10) + 1
+  Story.create({title: title, summary: summary, text: text, user_id: user_id, fandom_id: fandom_id})
+end
+
+genres = ["Genre One", "Genre Two"]
+
+10.times do
+  name = Faker::App.name
+  category = genres[rand(2)]
+  Fandom.create({name: name, category: category})
 end

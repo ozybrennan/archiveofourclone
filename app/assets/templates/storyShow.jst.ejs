@@ -1,4 +1,14 @@
-<section class="fact-box">
+<section class="fact-box show-fact-box">
+  <div class="superclass">
+    <div class="column-1">
+      Fandom
+    </div>
+    <div class="column-2">
+      <a href="javascript:void(0)" class="fandom-link">
+        <%= story.escape("fandom_name") %>
+      </a>
+    </div>
+  </div>
   <div class="superclass">
     <div class="column-1">
       Stats:
@@ -11,23 +21,30 @@
   </div>
 </section>
 <section class="title">
-  <h1><%= story.escape("title") %></h1>
+  <div class="title"><%= story.escape("title") %></div>
+  <% if (story.get("author")) { %>
+    <h2><a href="javascript:void(0)" class="author-link">
+      <%= story.escape("author_name") %>
+    </a></h2>
+  <% } %>
 </section>
 <aside class="summary">
   <% if (story.escape("summary")) { %>
     <div class="on-top-of-line">
-      <h4>Summary:</h4>
+      Summary:
     </div>
+    <hr />
     <div class="below-line">
       <%= story.escape("summary") %>
     </div>
   <% } %>
 </aside>
-<aside class="notes">
+<aside class="summary">
   <% if (story.escape("notes")) { %>
     <div class="on-top-of-line">
-      <h4>Notes:</h4>
+      Notes:
     </div>
+    <hr />
     <div class="below-line">
       <%= story.escape("notes") %>
     </div>

@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :stories
+
   def self.find_by_credentials(username, password)
     blank_errors = []
     blank_errors.push("Username is blank") if username == ""
