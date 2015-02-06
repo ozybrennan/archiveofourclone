@@ -2,7 +2,7 @@ ArchiveOfOurClone.Views.fandomIndexItem = Backbone.View.extend({
 
   template: JST['fandomIndexItem'],
 
-  className: "fandom-box",
+  className: "index-fandom-box",
 
   events: {
     'click a.fandom-list-name' : 'showFandom',
@@ -29,14 +29,14 @@ ArchiveOfOurClone.Views.fandomIndexItem = Backbone.View.extend({
 
   showFandom: function(event){
     event.preventDefault();
-    var url = "#search/created_at/fandom_name/" + $(event.currentTarget).data("id")
-    Backbone.history.navigate(url, {trigger: true})
+    var url = "#search/created_at/fandom_name/" + $(event.currentTarget).text().trim();
+    Backbone.history.navigate(url, {trigger: true});
   },
 
   showCategory: function(event){
     event.preventDefault();
-    var url = "fandoms/" + $(event.currentTarget).text()
-    Backbone.history.navigate(url, {trigger: true})
+    var url = "fandoms/" + $(event.currentTarget).text().trim();
+    Backbone.history.navigate(url, {trigger: true});
   },
 
 })

@@ -5,7 +5,8 @@
 } %>
 
 <% var tagField = function (tag_name) {
-  return "<div id='" + tag_name + "'></div>"
+  return "<div id='" + tag_name + "'></div> <input type='text' name='tags[" +
+    tag_name +"]' id='" + tag_name + "'><p>"
 } %>
 
 <input type="submit" value="sort and filter">
@@ -20,10 +21,18 @@
 <p>
 <label for="author_name">Author</label><br />
 <%= tagField("author_name") %>
-<input type="text" name="tags[author_name]" id="author_name">
-<p>
 <label for="fandom_name">Fandom</label><br />
 <%= tagField("fandom_name") %>
-<input type="text" name="tags[fandom_name]" id="fandom_name">
-<p>
+<label for="Ratings">Ratings</label><br />
+<%= tagField("Ratings") %>
+<label for="Warnings">Warnings</label><br />
+<%= tagField("Warnings") %>
+<label for="Categories">Categories</label><br />
+<%= tagField("Categories") %>
+<label for="Characters">Characters</label><br />
+<%= tagField("Characters") %>
+<label for="Pairings">Pairings</label><br />
+<%= tagField("Pairings") %>
+<label for="Additional">Additional Tags</label><br />
+<%= tagField("Additional") %>
 <input type="submit" value="sort and filter">

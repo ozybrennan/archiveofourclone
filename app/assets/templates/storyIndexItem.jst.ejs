@@ -1,3 +1,28 @@
+<% var factBoxSection = function(type) {
+  if (story.get(type)) {
+    var tags = story.get(type);
+    var tagCode = "";
+    _(tags).each(function(tag){
+      tagCode = tagCode + "<a href='javascript:void(0)' class='search-link "
+        + type + "'>"
+        + escapeHTML(tag) + "</a>" + ", ";
+    });
+    return tagCode.slice(0, -2);
+  }
+}
+
+var escapeHTML = (function () {
+    var chr = {
+        '"': '&quot;', '&': '&amp;', "'": '&#39;',
+        '/': '&#47;',  '<': '&lt;',  '>': '&gt;'
+    };
+    return function (text) {
+      return text.replace(/[\"&'\/<>]/g, function (a) { return chr[a]; });
+    };
+}());
+
+%>
+
 <div class="clearfix">
   <div class="index-item-name">
     <a href="javascript:void(0)" class="main-link index-title" data-id="<%= story.escape("id") %>">
@@ -14,7 +39,15 @@
   </div>
 </div>
 <div class="fandom">
-  <%= story.escape("fandom_name") %>
+  <a href='javascript:void(0)' class='search-link fandom_name'>
+    <%= story.escape("fandom_name") %>
+  </a>
+</div>
+<div class="tags">
+  <%= factBoxSection("Warnings") %>
+  <%= factBoxSection("Characters") %>
+  <%= factBoxSection("Relationships") %>
+  <%= factBoxSection("Additional") %>
 </div>
 <div class="summary">
   <%= story.escape("summary") %>

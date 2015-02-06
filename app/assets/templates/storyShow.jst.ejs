@@ -1,14 +1,39 @@
+<% var factBoxSection = function(name, type) {
+  if (story.get(type)) {
+    var tags = story.get(type);
+    if (story.get(type).length > 1) {
+      name = name + "s"
+    }
+    var startCode = "<div class='superclass'><div class='column-1'>" + name + ": </div><div class='column-2'>";
+    var endCode = "</div></div>";
+    var tagCode = "";
+    _(tags).each(function(tag){
+      tagCode = tagCode + "<a href='javascript:void(0)' class='search-link'>"
+        + escapeHTML(tag) + "</a>" + ", ";
+    });
+    return startCode + tagCode.slice(0, -2) + endCode;
+  }
+}
+
+var escapeHTML = (function () {
+    var chr = {
+        '"': '&quot;', '&': '&amp;', "'": '&#39;',
+        '/': '&#47;',  '<': '&lt;',  '>': '&gt;'
+    };
+    return function (text) {
+      return text.replace(/[\"&'\/<>]/g, function (a) { return chr[a]; });
+    };
+}());
+
+%>
+
 <section class="fact-box show-fact-box">
-  <div class="superclass">
-    <div class="column-1">
-      Fandom
-    </div>
-    <div class="column-2">
-      <a href="javascript:void(0)" class="fandom-link">
-        <%= story.escape("fandom_name") %>
-      </a>
-    </div>
-  </div>
+  <%= factBoxSection("Rating", "Ratings") %>
+  <%= factBoxSection("Archive Warning", "Warnings") %>
+  <%= factBoxSection("Fandom", "fandom_name") %>
+  <%= factBoxSection("Relationship", "Relationships") %>
+  <%= factBoxSection("Character", "Characters") %>
+  <%= factBoxSection("Additional Tag", "Additional") %>
   <div class="superclass">
     <div class="column-1">
       Stats:
@@ -20,6 +45,7 @@
     </div>
   </div>
 </section>
+
 <section class="title">
   <div class="title"><%= story.escape("title") %></div>
   <% if (story.get("author")) { %>

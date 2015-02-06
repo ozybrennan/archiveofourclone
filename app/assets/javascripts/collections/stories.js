@@ -35,7 +35,7 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
     var that = this;
     iteration_collection.each(function(model){
       _(tags).each(function(tag){
-        if (model.get(type) !== tag) {
+        if (model.get(type).indexOf(tag) === -1) {
           that.remove(model);
         }
       });
@@ -44,16 +44,16 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
 
   parseTags: function(tags_string){
     var tags_arr = tags_string.split("/");
-    var tags = {}
+    var tags = {};
     for (var i = 0; i < tags_arr.length; i += 2) {
-      var type = tags_arr[i]
-      var tag = tags_arr[i + 1]
+      var type = tags_arr[i];
+      var tag = tags_arr[i + 1];
       if (tags[type]) {
-        tags[type].push(tag)
+        tags[type].push(tag);
       } else {
-        tags[type] = [tag]
+        tags[type] = [tag];
       }
-    }
+    };
     return tags;
   },
 

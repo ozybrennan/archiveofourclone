@@ -4,7 +4,12 @@
 <section class="fandoms-index">
   Fandoms
   <div class="fandoms">
-  </div> 
+    <% _(fandoms).each(function(fandom){ %>
+      <a href="javascript:void(0)" class="fandom"><%= fandom[0] %></a>
+      (<%= fandom[1] %>)
+      <p>
+    <%  }) %>
+  </div>
 </section>
 <section class="works-index">
   Works

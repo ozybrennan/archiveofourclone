@@ -37,8 +37,8 @@ ArchiveOfOurClone.Views.fandomShow = Backbone.View.extend({
 
   showFandom: function(event){
     event.preventDefault();
-    var url = "#search/created_at/fandom_name/" + $(event.currentTarget).data("id")
-    Backbone.history.navigate(url, {trigger: true})
+    var url = "#search/created_at/fandom_name/" + $(event.currentTarget).text().trim();
+    Backbone.history.navigate(url, {trigger: true}); 
   },
 
 })

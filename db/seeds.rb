@@ -14,7 +14,7 @@ end
   title = Faker::Lorem.sentence
   summary = Faker::Lorem.paragraph(rand(5))
   notes = Faker::Lorem.paragraph(rand(5))
-  text = Faker::Lorem.paragraphs(rand(50)).join("\n")
+  text = Faker::Lorem.paragraphs(rand(50)).join("<p>")
   user_id = rand(20) + 1
   fandom_id = rand(10) + 1
   Story.create({title: title, summary: summary, text: text, user_id: user_id,

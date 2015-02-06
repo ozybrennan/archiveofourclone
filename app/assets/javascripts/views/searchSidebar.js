@@ -28,7 +28,7 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.SearchView.extend({
     _(savedTags).each(function(obj){
       var $obj = $(obj)
       var type = $obj.attr("id");
-      var tag_array = $obj.text().split(" ");
+      var tag_array = $obj.text().split(", ");
       _(tag_array).each(function(tag){
         if (tag !== "") {
           tags = tags + "/" + type + "/" + tag;
@@ -45,7 +45,7 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.SearchView.extend({
     var key = Object.keys(attributes)[0]
     var divSelector = "div#" + key;
     var inputSelector = "input#" + key;
-    var tag = attributes[key] + " "
+    var tag = attributes[key] + ", "
     $(inputSelector).val('');
     $(divSelector).prepend(tag);
   }

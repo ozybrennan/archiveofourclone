@@ -68,7 +68,7 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
       success: function () {
         var categories = collection.models[0].get("categories")
         _(categories).each(function(category){
-          var categoryName = category.category_name.toLowerCase().replace(" ", "_")
+          var categoryName = category.category_name
           if (name === categoryName) {
             shownCategory = category;
           }

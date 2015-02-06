@@ -1,0 +1,60 @@
+header.fandom-index {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  margin: 10px;
+}
+
+.fandom-index {
+  width: 1000px;
+}
+
+.index-fandom-box {
+  border: 1px solid #CCCCCC;
+  background: #DDDDDD;
+  margin: 10px;
+  width: 460px;
+  float: left;
+  height: 250px;
+  padding: 3px;
+}
+
+.index-smaller-fandom-box {
+  background: #FFFFFF;
+  width: 450px;
+  float: left;
+  font-size: 14px;
+  position: relative;
+  top: 3px;
+  padding: 10px 5px;
+}
+
+.category-list-name {
+  color: #2a2a2a;
+  font-family: Georgia, serif;
+  font-size: 18px;
+}
+
+header.fandom-show {
+  font-family: Georgia, serif;
+  font-size: 30px;
+}
+
+.show-fandom-box {
+  border: 1px solid #CCCCCC;
+  background: #DDDDDD;
+  margin: 10px 0px;
+  padding: 3px;
+  width: 1000px;
+}
+
+.show-smaller-fandom-box {
+  background: #FFFFFF;
+  font-size: 14px;
+  padding: 10px 3px;
+  width: 994px;
+}
+
+div.show-fandom {
+  /*float: left;
+  width: 494px;*/
+}

@@ -21,6 +21,17 @@ body, html {
   color: #930101;
 }
 
+a:not(.main-link) {
+  color: #2a2a2a;
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+
+a:not(.main-link):hover {
+  color: white;
+  background: #8E0000;
+}
+
 .clearfix:after {
   visibility: hidden;
   display: block;
