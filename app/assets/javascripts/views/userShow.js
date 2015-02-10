@@ -5,8 +5,9 @@ ArchiveOfOurClone.Views.userShow = Backbone.CompositeView.extend({
   initialize: function(){
     _(this.model.get("stories")).each(function(story){
       var model = new ArchiveOfOurClone.Models.Story(story);
-      var indexItem = new ArchiveOfOurClone.Views.storyIndexItem({ model: model})
+      var indexItem = new ArchiveOfOurClone.Views.storyIndexItem({ model: model, currentUser: this.model.get("current_user")})
       this.addSubview(".works", indexItem);
+      this.listenTo(model, "remove", this.render);
     }.bind(this));
     this.calculateTopFandoms();
   },

@@ -43,6 +43,12 @@ var escapeHTML = (function () {
     <%= story.escape("fandom_name") %>
   </a>
 </div>
+<% if (user) { %>
+<div class="buttons">
+  <button class="edit">Edit Story</button>
+  <button class="delete">Delete Story</button>
+</div>
+<% } %>
 <div class="tags">
   <%= factBoxSection("Warnings") %>
   <%= factBoxSection("Characters") %>
@@ -54,4 +60,5 @@ var escapeHTML = (function () {
 </div>
 <div class="stats">
   Words: <%= story.escape("word_count") %>
+  Kudos: <%= story.escape("kudos") %>
 </div>

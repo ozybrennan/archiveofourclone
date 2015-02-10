@@ -3,12 +3,25 @@
 <head>
   <title>ArchiveOfOurClone</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
+  <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if current_user %>
+    <%= current_user.username %>
+    <%= button_to "Log Out", sessions_url, method: :delete %>
+  <% else %>
+    <%= button_to "Log In", new_sessions_url, method: :get %>
+    <%= button_to "Sign Up", new_user_url, method: :get %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
+
+  <script>
+    filepicker.setKey("<%= ENV['FILEPICKER_API_KEY'] %>");
+  </script>
+  <% %>
 
 </body>
 </html>

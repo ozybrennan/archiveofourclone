@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  before_action :require_current_user, only: :destroy
+  before_action :require_current_user!, only: :destroy
 
   def new
     @user = User.new
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(user_params[:username], user_params[:password])
     if @user.is_a?(User)
       log_in!(@user)
-      render json: @user
+      redirect_to root_path
     else
       errors = @user
       @user = User.new(user_params)

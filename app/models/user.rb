@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many :stories, dependent: :destroy
+  has_many :kudos
+  has_many :kudosed_stories, through: :kudos, source: :story
 
   def self.find_by_credentials(username, password)
     blank_errors = []

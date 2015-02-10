@@ -1,0 +1,147 @@
+<header class="form-header">
+  <% if (story.get("id")) { %>
+    Edit Work
+  <% } else { %>
+    Create Work
+  <% } %>
+</header>
+<div class="form">
+  <form>
+    <div class="item">
+      <div class="title">Title</div>
+      <input type="text" name="story[title]" id="title" value="<%= story.get("title") %>">
+    </div>
+
+    <div class="item">
+      <div class="fandom">Fandom</div>
+      <input type="text" name="story[fandom]" id="fandom" value="<%=story.get("fandom_name") %>">
+    </div>
+
+    <div class="item">
+      <div class="genre">Fandom Genre (if new fandom)</div>
+      <input type="text" name="story[genre]" id="genre">
+    </div>
+
+    <% var selected = function (type, value) {
+      if (story.get(type) === value) {
+        return "selected";
+        }
+    } %>
+
+    <% var checked = function (value) {
+      checked_warnings = [];
+      _(story.get("Warnings")).each(function(tag){
+        checked_warnings.push(tag.div);
+      });
+      if (checked_warnings.indexOf(value) > -1) {
+        return "checked";
+        }
+    } %>
+
+    <div class="item">
+      <div class="rating">Rating</div>
+      <select id="rating" name="story[ratings]">
+        <option value="unrated" <%= selected("Ratings", "unrated") %>>Unrated</option>
+        <option value="general"<%= selected("Ratings", "general") %>>General Audiences</option>
+        <option value="teen"<%= selected("Ratings", "teen") %>>Teen And Up Audiences</option>
+        <option value="mature"<%= selected("Ratings", "mature") %>>Mature</option>
+        <option value="explicit"<%= selected("Ratings", "explicit") %>>Explicit</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <div class="warning">Warnings</div>
+      <div class="warning-item">
+        <input type="checkbox" value="Creator Chose Not To Use Archive Warnings"
+          name="story[warnings]" id="chose_not_to" <%= checked("Creator Chose Not To Use Archive Warnings") %>>
+        <div class="chose_not_to">Creator Chose Not To Use Archive Warnings</div>
+      </div>
+      <div class="warning-item">
+        <input type="checkbox" value="No Archive Warnings Apply" name="story[warnings]"
+          id="none_apply" <%= checked("No Archive Warnings Apply") %>>
+        <div class="none_apply">No Archive Warnings Apply</div>
+      </div>
+      <div class="warning-item">
+        <input type="checkbox" value="Graphic Depictions of Violence"
+          name="story[warnings]" id="violence" <%= checked("Graphic Depictions of Violence") %>>
+        <div class="violence">Graphic Depictions of Violence</div>
+      </div>
+      <div class="warning-item">
+        <input type="checkbox" value="Major Character Death" name="story[warnings]"
+          id="death" <%= checked("Major Character Death") %>>
+        <div class="death">Major Character Death</div>
+      </div>
+      <div class="warning-item">
+        <input type="checkbox" value="Rape"" name="story[warnings]" id="rape"
+          <%= checked("Rape") %>>
+        <div class="rape">Rape</div>
+      </div>
+      <div class="warning-item">
+        <input type="checkbox" value="Underage" name="story[warnings]" id="warning"
+          <%= checked("Underage") %>>
+        <div class="underage">Underage</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="category">Categories</div>
+      <select id="category" name="story[categories]">
+        <option <%= selected("Categories", "Gen") %>>Gen</option>
+        <option <%= selected("Categories", "Female/Female") %>>Female/Female</option>
+        <option <%= selected("Categories", "Male/Male") %>>Male/Male</option>
+        <option <%= selected("Categories", "Female/Male") %>>Female/Male</option>
+        <option <%= selected("Categories", "Other") %>>Other</option>
+        <option <%= selected("Categories", "Multi") %>>Multi</option>
+      </select>
+    </div>
+
+    <% var tags = function(type){
+      var tags = ""
+      _(story.tags).each = function(tag) {
+        if (tag.category === type) {
+          value = tag.div
+          var button = "<button class='tag-delete' data-id ='" + value + "'>X</button>"
+          var tag = "<div class='" + value + "'>" + button + value + ", </div>"
+          tags = tags + tag
+        }
+      }
+      return tags
+    } %>
+
+    <div class="item">
+      <div id="characters"><%= tags("Characters") %></div>
+      <div class="characters">Characters</div>
+      <input type="text" id="characters" name="story[characters]" class="freeform-tags">
+    </div>
+
+    <div class="item">
+      <div id="relationships"><%= tags("Relationships") %></div>
+      <div class="relationships">Relationships</div>
+      <input type="text" id="relationships" name="story[relationships]" class="freeform-tags">
+    </div>
+
+    <div class="item">
+      <div id="additional"><%= tags("Additional") %></div>
+      <div class="additional">Additional Tags</div>
+      <input type="text" id="additional" name="story[additional]" class="freeform-tags">
+    </div>
+
+    <div class="item">
+      <div class="summary">Summary</div>
+      <textarea id="summary" name="story[summary]" rows="10" cols="50"><%= story.get("summary") %></textarea>
+    </div>
+
+    <div class="item">
+      <div class="notes">Notes</div>
+      <textarea id="notes" name="story[notes]" rows="10" cols="50"><%= story.get("notes") %></textarea>
+    </div>
+
+    <div class="item">
+      <div class="story">Story Text</div>
+      <textarea id="story" name="story[text]" rows="1000" cols="50"><%= story.get("text") %></textarea>
+      <input type="filepicker" data-fp-mimetypes="text/*,application/msword" name="story[text]" data-fp-button-text="Upload A File">
+    </div>
+
+    <input type="submit" value="Submit" class="submit">
+  </form>
+</div>

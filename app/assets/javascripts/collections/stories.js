@@ -3,10 +3,9 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
 
   model: ArchiveOfOurClone.Models.Story,
 
+  comparator: 'created_at',
+
   initialize: function(models, options) {
-    if (options && options.tags) {
-      this.tags = this.parseTags(options.tags);
-    }
   },
 
   getOrFetch: function(id) {
@@ -30,37 +29,10 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
     return this.comparator;
   },
 
-  filterByTag: function(tags, type){
-    var iteration_collection = this.clone();
-    var that = this;
-    iteration_collection.each(function(model){
-      _(tags).each(function(tag){
-        if (model.get(type).indexOf(tag) === -1) {
-          that.remove(model);
-        }
-      });
-    });
-  },
-
-  parseTags: function(tags_string){
-    var tags_arr = tags_string.split("/");
-    var tags = {};
-    for (var i = 0; i < tags_arr.length; i += 2) {
-      var type = tags_arr[i];
-      var tag = tags_arr[i + 1];
-      if (tags[type]) {
-        tags[type].push(tag);
-      } else {
-        tags[type] = [tag];
-      }
-    };
-    return tags;
-  },
-
-  filterCollection: function () {
-    _(this.tags).each(function(tags, type){
-      this.filterByTag(tags, type);
-    }.bind(this));
+  parse: function (response) {
+    this.page = response.page
+    this.total_pages = response.total_pages
+    return response.models;
   },
 
 });

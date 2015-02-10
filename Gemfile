@@ -33,6 +33,10 @@ gem 'font-awesome-rails'
 
 gem 'jquery-ui-rails'
 
+gem 'kaminari'
+
+gem 'filepicker-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

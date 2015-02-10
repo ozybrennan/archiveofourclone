@@ -17,8 +17,10 @@ end
   text = Faker::Lorem.paragraphs(rand(50)).join("<p>")
   user_id = rand(20) + 1
   fandom_id = rand(10) + 1
+  kudos = rand(100)
+  hits = rand(300)
   Story.create({title: title, summary: summary, text: text, user_id: user_id,
-    fandom_id: fandom_id, notes: notes})
+    fandom_id: fandom_id, notes: notes, kudos_count: kudos, hits: hits})
 end
 
 genres = ["Genre One", "Genre Two"]
@@ -27,6 +29,12 @@ genres = ["Genre One", "Genre Two"]
   name = Faker::App.name
   category = genres[rand(2)]
   Fandom.create({name: name, category: category})
+end
+
+5000.times do
+  user_id = rand(20) + 1
+  story_id = rand(100) + 1
+  Kudo.create({user_id: user_id, story_id: story_id})
 end
 
 types = ["Ratings", "Warnings", "Categories", "Characters", "Relationships", "Additional"]

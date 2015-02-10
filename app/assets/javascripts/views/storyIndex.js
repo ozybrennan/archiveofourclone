@@ -2,6 +2,11 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
 
   template: JST['storyIndex'],
 
+  events: {
+    'click button.next' : "nextPage",
+    'click button.previous' : "previousPage"
+  },
+
   initialize: function() {
 
    this.collection.filterCollection();
@@ -18,9 +23,28 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(this.template({collection: this.collection}));
     this.attachSubviews();
     return this;
+  },
+
+  previousPage: function() {
+    this.goToPage(-1);
+  },
+
+  nextPage: function () {
+    this.goToPage(1);
+  },
+
+  goToPage: function(num) {
+    if (_.isFunction(this.collection.comparator)) {
+      sortCriterion = "kudos";
+    } else {
+      sortCriterion = this.collection.comparator;
+    }
+    var page = this.collection.page + num;
+    var url = "#search/" + sortCriterion + "/" + page;
+    Backbone.history.navigate(url, {trigger: true });
   },
 
 });

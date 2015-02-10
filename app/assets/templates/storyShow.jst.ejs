@@ -15,6 +15,16 @@
   }
 }
 
+var fandomSection = function() {
+  if (story.get("fandom_name")) {
+    var fandom = story.escape("fandom_name");
+    var startCode = "<div class='superclass'><div class='column-1'>Fandom: </div><div class='column-2'>";
+    var endCode = "</div></div>";
+    var tagCode = "<a href='javascript:void(0)' class='search-link'>" + fandom + "</a>"
+    return startCode + tagCode + endCode;
+  }
+}
+
 var escapeHTML = (function () {
     var chr = {
         '"': '&quot;', '&': '&amp;', "'": '&#39;',
@@ -30,7 +40,7 @@ var escapeHTML = (function () {
 <section class="fact-box show-fact-box">
   <%= factBoxSection("Rating", "Ratings") %>
   <%= factBoxSection("Archive Warning", "Warnings") %>
-  <%= factBoxSection("Fandom", "fandom_name") %>
+  <%= fandomSection() %>
   <%= factBoxSection("Relationship", "Relationships") %>
   <%= factBoxSection("Character", "Characters") %>
   <%= factBoxSection("Additional Tag", "Additional") %>
@@ -42,6 +52,7 @@ var escapeHTML = (function () {
       Published: <% var date = new Date(story.escape("created_at")) %>
       <%= moment(date).format("YYYY[-]MM[-]D") %>
       Words: <%= story.escape("word_count") %>
+      Hits: <%= story.escape("hits") %>
     </div>
   </div>
 </section>
@@ -77,6 +88,18 @@ var escapeHTML = (function () {
   <% } %>
 </aside>
 <article>
-  <%= story.escape("text") %>
+  <%= story.get("text") %>
 </article>
 <button class="top">Top</button>
+<% if (!story.get("current_user") || story.kudosUsers.indexOf(story.get("current_user")) === -1) { %>
+  <button class="kudos">Kudos <3</button>
+<% } else { %>
+  <button class="unkudos">Remove Kudos</button>
+<% } %>
+
+<% if (story.get("kudosUsers")) { %>
+  <% var users = story.get("kudosUsers").slice(0, 3)%>
+  <%= users.join(", ") %> and <%= story.escape("kudos") - users.length %> other people have left kudos on this work!
+<% } else { %>
+  <%= story.escape("kudos") %> people have left kudos on this work!
+<% } %>

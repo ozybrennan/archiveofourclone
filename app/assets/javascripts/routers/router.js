@@ -6,19 +6,23 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '': 'baseStoryIndex',
-    'search/:sortCriterion/*tags': 'storySearch',
+    ':page': 'baseStoryIndex',
+    'search/:sortCriterion/:page(/*tags)': 'storySearch',
+    'stories/new': 'storyForm',
     'stories/:id': 'storyShow',
+    'stories/:id/edit': 'storyForm',
     'users': 'userIndex',
     'users/:id': 'userShow',
     'fandoms': 'categoryIndex',
     'fandoms/:name': 'categoryShow',
   },
 
-  baseStoryIndex: function() {
-    ArchiveOfOurClone.Collections.baseCollection.fetch({
-        success: this._storyIndex.bind(this),
-      });
+  baseStoryIndex: function(page) {
+    var that = this;
+    new ArchiveOfOurClone.Collections.Stories().fetch({
+        data: { page: page },
+        success: that._storyIndex.bind(that)
+    });
   },
 
   storyShow: function(id) {
@@ -27,11 +31,28 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
    this._swapViews(view);
   },
 
-  storySearch: function(sortCriterion, tags) {
-    var models = ArchiveOfOurClone.Collections.baseCollection.models;
-    var collection = new ArchiveOfOurClone.Collections.Stories(models,
-      { comparator: sortCriterion, tags: tags })
-      this._storyIndex(collection)
+  storyForm: function (id) {
+    if (id) {
+      var model = ArchiveOfOurClone.Collections.baseCollection.getOrFetch(id);
+    }
+    var view = new ArchiveOfOurClone.Views.storyForm({model: model})
+    this._swapViews(view);
+  },
+
+  storySearch: function(sortCriterion, page, tags) {
+    var that = this;
+
+    if (sortCriterion === "kudos") {
+      sortCriterion = function(a) {
+        return a.get("kudos") * -1;
+      };
+    }
+
+    var collection = new ArchiveOfOurClone.Collections.Stories([],
+      { comparator: sortCriterion, tags: tags }).fetch({
+        data: { page: page, tags: tags },
+        success: that._storyIndex.bind(that)
+      });
   },
 
   userIndex: function(){

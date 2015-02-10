@@ -9,7 +9,7 @@
     tag_name +"]' id='" + tag_name + "'><p>"
 } %>
 
-<input type="submit" value="sort and filter">
+<input type="submit" class="sort-and-filter" value="Sort And Filter">
 <p>
 <select name="sort_criterion">
   <option value="updated_at" <%= selected("updated_at") %>>Date Updated</option>
@@ -17,6 +17,7 @@
   <option value="word_count" <%= selected("word_count") %>>Word Count</option>
   <option value="title" <%= selected("title") %>>Title</option>
   <option value="author_name" <%= selected("author_name") %>>Author</option>
+  <option value="kudos" <%= selected("kudos") %>>Kudos</option>
 </select>
 <p>
 <label for="author_name">Author</label><br />
@@ -35,4 +36,4 @@
 <%= tagField("Pairings") %>
 <label for="Additional">Additional Tags</label><br />
 <%= tagField("Additional") %>
-<input type="submit" value="sort and filter">
+<input type="submit" class="sort-and-filter" value="Sort And Filter">

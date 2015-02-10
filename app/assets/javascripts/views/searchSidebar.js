@@ -1,12 +1,13 @@
-ArchiveOfOurClone.Views.searchSidebar = Backbone.SearchView.extend({
+ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
 
   template: JST['searchSidebar'],
 
   tagName: 'form',
 
   events: {
-    'submit': 'submit',
-    'blur input': 'addTag',
+    'click input.sort-and-filter': 'submit',
+    'blur input:not(.sort-and-filter)': 'addTag',
+    'click button.tag-delete': 'deleteTag',
   },
 
   render: function(){
@@ -45,9 +46,19 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.SearchView.extend({
     var key = Object.keys(attributes)[0]
     var divSelector = "div#" + key;
     var inputSelector = "input#" + key;
-    var tag = attributes[key] + ", "
-    $(inputSelector).val('');
-    $(divSelector).prepend(tag);
-  }
+    var value = attributes[key]
+    if (value) {
+      var button = "<button class='tag-delete' data-id ='" + value + "'>X</button>"
+      var tag = "<div class='" + value + "'>" + button + value + ", </div>"
+      $(inputSelector).val('');
+      $(divSelector).prepend(tag);
+    }
+  },
+
+  deleteTag: function(event) {
+    event.preventDefault();
+    var tagSelector = "div." + $(event.currentTarget).data("id");
+    $(tagSelector).remove();
+  },
 
 })

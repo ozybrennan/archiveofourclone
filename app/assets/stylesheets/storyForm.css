@@ -1,0 +1,23 @@
+header.form-header{
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: #2a2a2a;
+}
+
+div.form{
+  background: #DDDDDD;
+  position: relative;
+  border: 1px solid #C0C0C0;
+  outline: 3px solid #F3EFEC;
+}
+
+div.item {
+  margin: 0px 10px;
+}
+
+div.item > label {
+  width: 500px;
+}
+
+div.item > input {
+}

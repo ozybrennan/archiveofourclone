@@ -4,7 +4,8 @@ ArchiveOfOurClone.Views.fandomShow = Backbone.View.extend({
 
   events: {
     'click button.top': "goToTop",
-    'click a.fandom-list-name': "showFandom"
+    'click a.fandom-list-name': "showFandom",
+    'click button.all-genres' : "fandomIndex",
   },
 
   initialize: function() {
@@ -38,7 +39,12 @@ ArchiveOfOurClone.Views.fandomShow = Backbone.View.extend({
   showFandom: function(event){
     event.preventDefault();
     var url = "#search/created_at/fandom_name/" + $(event.currentTarget).text().trim();
-    Backbone.history.navigate(url, {trigger: true}); 
+    Backbone.history.navigate(url, {trigger: true});
+  },
+
+  fandomIndex: function(event){
+    event.preventDefault();
+    Backbone.history.navigate("fandoms", {trigger: true});
   },
 
 })
