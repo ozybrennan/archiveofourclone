@@ -4,6 +4,8 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
 
   events: {
     'click button.top': 'goToTop',
+    'click a.search-link': 'showTag',
+    'click a.author-link': 'showUser',
     'click button.kudos': 'leaveKudos',
     'click button.unkudos': 'unkudos'
   },
@@ -19,9 +21,10 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
 
   render: function(){
     if (this.model.get("hits") && this.hit) {
-      this.hit = false
-      var hits = this.model.get("hits") + 1
-      this.model.save({hits: hits})
+      debugger
+        this.hit = false
+        var hits = this.model.get("hits") + 1
+        this.model.save({hits: hits})
     }
     var content = this.template({story: this.model})
     this.$el.html(content);
@@ -42,6 +45,20 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
     event.preventDefault();
     var kudos = this.model.get("kudos") - 1;
     this.model.save({kudos_count: kudos});
-  }
+  },
+
+  showTag: function(event){
+    event.preventDefault();
+    var $target = $(event.currentTarget)
+    var searchClass = $target.attr("class").split(" ")[1];
+    var url = "#search/created_at/1/" + searchClass + "/" + $target.text().trim();
+    Backbone.history.navigate(url, {trigger: true});
+  },
+
+  showUser : function(event) {
+    event.preventDefault();
+    var url = "#users/" + $(event.currentTarget).data("id")
+    Backbone.history.navigate(url, {trigger: true})
+  },
 
 })

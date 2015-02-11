@@ -1,26 +1,27 @@
-<% var factBoxSection = function(name, type) {
-  if (story.get(type)) {
-    var tags = story.get(type);
-    if (story.get(type).length > 1) {
-      name = name + "s"
+<%
+var factBoxSection = function(name, type) {
+    if (story.get(type) && story.get(type)[0] !== null) {
+      var tags = story.get(type);
+      if (story.get(type).length > 1) {
+        name = name + "s"
+      }
+      var startCode = "<div class='superclass'><div class='column-1'>" + name + ": </div><div class='column-2'>";
+      var endCode = "</div></div>";
+      var tagCode = "";
+      _(tags).each(function(tag){
+        tagCode = tagCode + "<a href='javascript:void(0)' class='search-link " + type + "'>"
+          + escapeHTML(tag) + "</a>" + ", ";
+      });
+      return startCode + tagCode.slice(0, -2) + endCode;
     }
-    var startCode = "<div class='superclass'><div class='column-1'>" + name + ": </div><div class='column-2'>";
-    var endCode = "</div></div>";
-    var tagCode = "";
-    _(tags).each(function(tag){
-      tagCode = tagCode + "<a href='javascript:void(0)' class='search-link'>"
-        + escapeHTML(tag) + "</a>" + ", ";
-    });
-    return startCode + tagCode.slice(0, -2) + endCode;
   }
-}
 
 var fandomSection = function() {
   if (story.get("fandom_name")) {
     var fandom = story.escape("fandom_name");
     var startCode = "<div class='superclass'><div class='column-1'>Fandom: </div><div class='column-2'>";
     var endCode = "</div></div>";
-    var tagCode = "<a href='javascript:void(0)' class='search-link'>" + fandom + "</a>"
+    var tagCode = "<a href='javascript:void(0)' class='search-link fandom_name'>" + fandom + "</a>"
     return startCode + tagCode + endCode;
   }
 }
@@ -58,9 +59,9 @@ var escapeHTML = (function () {
 </section>
 
 <section class="title">
-  <div class="title"><%= story.escape("title") %></div>
+  <header class="title"><%= story.escape("title") %></header>
   <% if (story.get("author")) { %>
-    <h2><a href="javascript:void(0)" class="author-link">
+    <h2><a href="javascript:void(0)" class="author-link" data-id="<%= story.get("author").id %>">
       <%= story.escape("author_name") %>
     </a></h2>
   <% } %>
@@ -70,7 +71,7 @@ var escapeHTML = (function () {
     <div class="on-top-of-line">
       Summary:
     </div>
-    <hr />
+    <hr class="story" />
     <div class="below-line">
       <%= story.escape("summary") %>
     </div>
@@ -81,7 +82,7 @@ var escapeHTML = (function () {
     <div class="on-top-of-line">
       Notes:
     </div>
-    <hr />
+    <hr class="story" />
     <div class="below-line">
       <%= story.escape("notes") %>
     </div>
@@ -91,7 +92,7 @@ var escapeHTML = (function () {
   <%= story.get("text") %>
 </article>
 <button class="top">Top</button>
-<% if (!story.get("current_user") || story.kudosUsers.indexOf(story.get("current_user")) === -1) { %>
+<% if (!story.get("current_user") || !story.kudosUsers || story.kudosUsers.indexOf(story.get("current_user")) === -1) { %>
   <button class="kudos">Kudos <3</button>
 <% } else { %>
   <button class="unkudos">Remove Kudos</button>

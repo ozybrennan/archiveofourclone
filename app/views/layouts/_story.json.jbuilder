@@ -9,6 +9,7 @@ end
 
 json.fandom do
   json.name story.fandom.name
+  json.category story.fandom.category
   json.id story.fandom.id
 end
 

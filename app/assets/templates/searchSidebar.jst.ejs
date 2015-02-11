@@ -5,7 +5,7 @@
 } %>
 
 <% var tagField = function (tag_name) {
-  return "<div id='" + tag_name + "'></div> <input type='text' name='tags[" +
+  return "<div class='tags-div' id='" + tag_name + "'></div> <input type='text' name='tags[" +
     tag_name +"]' id='" + tag_name + "'><p>"
 } %>
 
@@ -25,11 +25,56 @@
 <label for="fandom_name">Fandom</label><br />
 <%= tagField("fandom_name") %>
 <label for="Ratings">Ratings</label><br />
-<%= tagField("Ratings") %>
+<div class="item">
+  <div class="rating">Rating</div>
+    <select id="rating" name="story[ratings]">
+      <option value="unrated">Unrated</option>
+      <option value="general">General Audiences</option>
+      <option value="teen">Teen And Up Audiences</option>
+      <option value="mature">Mature</option>
+      <option value="explicit">Explicit</option>
+    </select>
+  </div>
+</div>
 <label for="Warnings">Warnings</label><br />
-<%= tagField("Warnings") %>
+<div class="item">
+<div class="warning-item">
+  <input type="checkbox" value="Creator Chose Not To Use Archive Warnings"
+    name="story[warnings][]" id="chose_not_to">
+  <div class="chose_not_to">Creator Chose Not To Use Archive Warnings</div>
+</div>
+<div class="warning-item">
+  <input type="checkbox" value="No Archive Warnings Apply" name="story[warnings][]"
+    id="none_apply">
+  <div class="none_apply">No Archive Warnings Apply</div>
+</div>
+<div class="warning-item">
+  <input type="checkbox" value="Graphic Depictions of Violence"
+    name="story[warnings][]" id="violence">
+  <div class="violence">Graphic Depictions of Violence</div>
+</div>
+<div class="warning-item">
+  <input type="checkbox" value="Major Character Death" name="story[warnings][]"
+    id="death">
+  <div class="death">Major Character Death</div>
+</div>
+<div class="warning-item">
+  <input type="checkbox" value="Rape"" name="story[warnings][]" id="rape">
+  <div class="rape">Rape</div>
+</div>
+<div class="warning-item">
+  <input type="checkbox" value="Underage" name="story[warnings][]" id="warning">
+  <div class="underage">Underage</div>
+</div>
 <label for="Categories">Categories</label><br />
-<%= tagField("Categories") %>
+<select id="category" name="story[categories]">
+  <option>Gen</option>
+  <option>Female/Female</option>
+  <option>Male/Male</option>
+  <option>Female/Male</option>
+  <option>Other</option>
+  <option>Multi</option>
+</select>
 <label for="Characters">Characters</label><br />
 <%= tagField("Characters") %>
 <label for="Pairings">Pairings</label><br />

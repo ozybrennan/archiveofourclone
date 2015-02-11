@@ -12,9 +12,9 @@ class Story < ActiveRecord::Base
   has_many :kudos
   has_many :kudos_users, through: :kudos, source: :user
 
-  default_scope order ("created_at")
+  default_scope { order("created_at") }
 
-  def self.find_by_tag(tags)
+  def self.find_by_tags(tags)
     tags = self.parse_tags(tags)
     story_ids = []
     if tags["fandom_name"]
@@ -27,9 +27,11 @@ class Story < ActiveRecord::Base
       story_ids = self.filter_story_ids(story_ids, author)
       tags.delete("author_name")
     end
-    tags.each do |category, label|
-      tag = Tag.where("category = ? AND label = ?", category, label)
-      story_ids = self.filter_story_ids(story_ids, tag)
+    tags.each do |category, labels|
+      labels.each do |label|
+        tag = Tag.where("category = ? AND label = ?", category, label).first
+        story_ids = self.filter_story_ids(story_ids, tag)
+      end
     end
 
     Story.find(story_ids)
@@ -52,7 +54,7 @@ class Story < ActiveRecord::Base
     tags = {}
 
     tags_arr.each_with_index do |type, i|
-      if index % 2 == 0
+      if i % 2 == 0
         tag = tags_arr[i + 1]
         if tags[type]
           tags[type].push(tag)
@@ -72,14 +74,13 @@ class Story < ActiveRecord::Base
     story_attributes[:title] = story_params[:title]
     story_attributes[:summary] = story_params[:summary]
     story_attributes[:notes] = story_params[:notes]
-    story_attributes[:text] = story_params[:text]
     story_attributes[:kudos_count] = story_params[:kudos_count]
     story_attributes[:hits] = story_params[:hits]
 
-    if story_params[:fandom]
+    if !story_params[:fandom].nil?
       fandom = Fandom.find_by_name(story_params[fandom])
       if fandom.nil?
-        fandom = Fandom.create({ name: name, category: story_params[:genre] })
+        fandom = Fandom.create({ name: fandom, category: story_params[:genre] })
       end
       story_attributes[:fandom_id] = fandom.id
     end
@@ -94,18 +95,20 @@ class Story < ActiveRecord::Base
     end
 
     [:warnings, :ratings, :categories, :characters, :relationships, :additional].each do |type|
-      self.process_tag(type, story_params[type]) if story_params[type]
+      self.process_tag(type, story_params[type]) if !story_params[type].nil?
     end
 
-    story_params
+    story_attributes
   end
 
-  def process_tag(type, label)
-    tag = Tag.find_by_label(label)
-    if tag.nil?
-      tag = Tag.create({label: label, type: type.to_s.capitalize})
+  def process_tag(type, labels)
+    labels.each do |label|
+      tag = Tag.where("label = ? AND category = ?", label, type).first
+      if tag.nil?
+        tag = Tag.create({label: label, category: type.to_s.capitalize})
+      end
+      Tagging.create({story_id: self.id, tag_id: tag.id})
     end
-    Tagging.create({story_id: self.id, tag_id: tag.id})
   end
 
   private

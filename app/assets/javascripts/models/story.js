@@ -1,6 +1,12 @@
 ArchiveOfOurClone.Models.Story = Backbone.Model.extend({
   urlRoot: 'api/stories',
 
+  initialize: function(attributes) {
+    if (attributes) {
+      this.set(this.parse(attributes));
+    }
+  },
+
   parse: function(attributes) {
 
     if (attributes.author) {
@@ -15,7 +21,9 @@ ArchiveOfOurClone.Models.Story = Backbone.Model.extend({
         if (!attributes[tag.category]) {
           attributes[tag.category] = [tag.label];
         } else {
-          attributes[tag.category].push(tag.label);
+          if (attributes[tag.category].indexOf(tag.label) === -1) {
+            attributes[tag.category].push(tag.label);
+          }
         }
       });
     }

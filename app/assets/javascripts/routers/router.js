@@ -6,7 +6,6 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    ':page': 'baseStoryIndex',
     'search/:sortCriterion/:page(/*tags)': 'storySearch',
     'stories/new': 'storyForm',
     'stories/:id': 'storyShow',
@@ -15,6 +14,7 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
     'users/:id': 'userShow',
     'fandoms': 'categoryIndex',
     'fandoms/:name': 'categoryShow',
+    ':page': 'baseStoryIndex',
   },
 
   baseStoryIndex: function(page) {
@@ -42,16 +42,27 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
   storySearch: function(sortCriterion, page, tags) {
     var that = this;
 
+    var criterionURL = "#search/" + sortCriterion;
+    var tagURL = ""
+    if (tags) {
+      tagURL = "/" + tags
+    }
+
     if (sortCriterion === "kudos") {
       sortCriterion = function(a) {
         return a.get("kudos") * -1;
       };
     }
+    if (sortCriterion === "hits") {
+      sortCriterion = function(a) {
+        return a.get("hits") * -1;
+      };
+    }
 
     var collection = new ArchiveOfOurClone.Collections.Stories([],
-      { comparator: sortCriterion, tags: tags }).fetch({
+      { comparator: sortCriterion, criterionURL: criterionURL, tagURL: tagURL }).fetch({
         data: { page: page, tags: tags },
-        success: that._storyIndex.bind(that)
+        success: that._storyIndex.bind(that),
       });
   },
 

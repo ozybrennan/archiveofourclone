@@ -3,7 +3,7 @@ body, html {
   padding: 0;
   color: #2a2a2a;
   font-family: Lucida Grande;
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 #main {
@@ -12,14 +12,36 @@ body, html {
   background: #FFFFFF;
 }
 
+header {
+  font-size: 30px;
+  font-family: Georgia, serif;
+}
+
 .fact-box {
   border: 1px solid #E9E9E9;
   margin-bottom: 10px;
   position: relative;
+  background: #FFFFFF;
+  padding: 5px;
 }
 
 .main-link {
   color: #930101;
+  font-size: 16px;
+  font-family: Georgia, serif;
+}
+
+.index-item-name {
+  font-size: 16px;
+  font-family: Georgia, serif;
+}
+
+a.Warnings {
+  font-weight: bold;
+}
+
+a.Relationships {
+  background: #EEEEEE;
 }
 
 a:not(.main-link) {
@@ -31,6 +53,10 @@ a:not(.main-link) {
 a:not(.main-link):hover {
   color: white;
   background: #8E0000;
+}
+
+a.main-link:visited {
+  color: #747979;
 }
 
 .clearfix:after {

@@ -1,6 +1,17 @@
 <header>
-  <%= collection.length %> Works in <%= collection.topTag %>
-  <button class="previous">Previous</button><button class="next">Next</button>
+  <% var numberWorks = collection.page * 25
+  var lastWorks = numberWorks
+  if (numberWorks > collection.total_works) {
+    lastWorks = collection.total_works;
+  }%>
+  <%= numberWorks - 24 %> - <%= lastWorks %> out of <%= collection.total_works %> Works in
+  <%= collection.topTag %>
+  <% if (collection.page !== 1) { %>
+    <button class="previous">Previous</button>
+  <% } %>
+  <% if (numberWorks > collection.total_works) { %>
+    <button class="next">Next</button>
+  <% } %>
 </header>
 <div class="story-index"></div>
 <section class="search"></div>

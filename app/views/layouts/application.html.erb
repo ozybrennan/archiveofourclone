@@ -8,6 +8,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <script>
+    filepicker.setKey("<%= ENV['FILEPICKER_API_KEY'] %>");
+  </script>
+
   <% if current_user %>
     <%= current_user.username %>
     <%= button_to "Log Out", sessions_url, method: :delete %>
@@ -17,11 +21,6 @@
   <% end %>
 
   <%= yield %>
-
-  <script>
-    filepicker.setKey("<%= ENV['FILEPICKER_API_KEY'] %>");
-  </script>
-  <% %>
 
 </body>
 </html>

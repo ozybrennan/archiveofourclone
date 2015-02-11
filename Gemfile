@@ -37,6 +37,8 @@ gem 'kaminari'
 
 gem 'filepicker-rails'
 
+gem 'figaro'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -1,4 +1,5 @@
 <% var factBoxSection = function(type) {
+
   if (story.get(type)) {
     var tags = story.get(type);
     var tagCode = "";
@@ -7,7 +8,7 @@
         + type + "'>"
         + escapeHTML(tag) + "</a>" + ", ";
     });
-    return tagCode.slice(0, -2);
+      return tagCode;
   }
 }
 
@@ -42,8 +43,8 @@ var escapeHTML = (function () {
   <a href='javascript:void(0)' class='search-link fandom_name'>
     <%= story.escape("fandom_name") %>
   </a>
-</div>
-<% if (user) { %>
+</div> <p>
+<% if (user && this.user.get("current_user") && user.get("id") === this.user.get("current_user").id) { %>
 <div class="buttons">
   <button class="edit">Edit Story</button>
   <button class="delete">Delete Story</button>
@@ -51,8 +52,8 @@ var escapeHTML = (function () {
 <% } %>
 <div class="tags">
   <%= factBoxSection("Warnings") %>
-  <%= factBoxSection("Characters") %>
   <%= factBoxSection("Relationships") %>
+  <%= factBoxSection("Characters") %>
   <%= factBoxSection("Additional") %>
 </div>
 <div class="summary">

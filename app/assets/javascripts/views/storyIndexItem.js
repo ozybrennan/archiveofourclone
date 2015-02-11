@@ -13,14 +13,14 @@ ArchiveOfOurClone.Views.storyIndexItem = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    if (options.currentUser) {
-      this.currentUser = options.currentUser
+    if (options.user) {
+      this.user = options.user
     }
     this.listenTo(this.model, "sync", this.render)
   },
 
   render: function(){
-    var content = this.template({story: this.model, user: this.currentUser})
+    var content = this.template({story: this.model, user: this.user})
     this.$el.html(content);
     return this;
   },
@@ -35,7 +35,7 @@ ArchiveOfOurClone.Views.storyIndexItem = Backbone.View.extend({
     event.preventDefault();
     var $target = $(event.currentTarget)
     var searchClass = $target.attr("class").split(" ")[1];
-    var url = "#search/created_at/" + searchClass + "/" + $target.text().trim();
+    var url = "#search/created_at/1/" + searchClass + "/" + $target.text().trim();
     Backbone.history.navigate(url, {trigger: true});
   },
 

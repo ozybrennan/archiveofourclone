@@ -2,7 +2,7 @@ ArchiveOfOurClone.Views.userIndexItem = Backbone.View.extend({
 
   template: JST['userIndexItem'],
 
-  className: "fact-box",
+  className: "user-index-box",
 
   events: {
     'click a.user' : 'showUser'

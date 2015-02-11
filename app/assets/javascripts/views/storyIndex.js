@@ -9,8 +9,6 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
 
   initialize: function() {
 
-   this.collection.filterCollection();
-
    this.collection.each(function(model){
       var indexItem = new ArchiveOfOurClone.Views.storyIndexItem({ model: model})
       this.addSubview(".story-index", indexItem);
@@ -43,7 +41,7 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
       sortCriterion = this.collection.comparator;
     }
     var page = this.collection.page + num;
-    var url = "#search/" + sortCriterion + "/" + page;
+    var url = "#" + this.collection.criterionURL + page + this.collection.tagURL;
     Backbone.history.navigate(url, {trigger: true });
   },
 

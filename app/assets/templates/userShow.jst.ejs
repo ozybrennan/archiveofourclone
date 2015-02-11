@@ -1,9 +1,10 @@
-<div class="username">
+<header class="username">
   <%= user.escape("username") %>
-</div>
-<section class="fandoms-index">
-  Fandoms
-  <div class="fandoms">
+</header>
+<hr class="user"/>
+<section class="user-box">
+  <header class="user">Fandoms</header>
+  <div class="smaller-user-box">
     <% _(fandoms).each(function(fandom){ %>
       <a href="javascript:void(0)" class="fandom"><%= fandom[0] %></a>
       (<%= fandom[1] %>)
@@ -11,8 +12,8 @@
     <%  }) %>
   </div>
 </section>
-<section class="works-index">
-  Works
+<section class="user-box">
+  <header class="user">Works</header>
   <div class="works">
   </div>
 </section>

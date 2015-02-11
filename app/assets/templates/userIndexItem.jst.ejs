@@ -1,2 +1,4 @@
-<a href="javascript:void(0)" class="user main-link"><%= user.escape("username") %></a>
-<a href="javascript:void(0)"><%= user.get("stories").length %> works</a>
+<div class="user-item-name">
+  <a href="javascript:void(0)" class="user main-link"><%= user.escape("username") %></a>
+</div>
+<a href="javascript:void(0)" class="story-link"><%= user.get("stories").length %> works</a>

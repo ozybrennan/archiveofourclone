@@ -10,6 +10,23 @@
   User.create(username: username, password: "password")
 end
 
+ratings = ["unrated", "general", "teen", "mature", "explicit"]
+categories = ["Gen", "Male/Male", "Male/Female", "Female/Female", "Other", "Multi"]
+warnings = ["Creator Chose Not To Use Archive Warnings", "No Archive Warnings Apply",
+"Graphic Depictions of Violence", "Major Character Death", "Rape", "Underage"]
+
+ratings.each do |rating|
+  Tag.create({label: rating, category: "Ratings"})
+end
+
+categories.each do |category|
+  Tag.create({label: category, category: "Categories"})
+end
+
+warnings.each do |warning|
+  Tag.create({label: warning, category: "Warnings"})
+end
+
 100.times do
   title = Faker::Lorem.sentence
   summary = Faker::Lorem.paragraph(rand(5))
@@ -19,8 +36,12 @@ end
   fandom_id = rand(10) + 1
   kudos = rand(100)
   hits = rand(300)
-  Story.create({title: title, summary: summary, text: text, user_id: user_id,
+  rating = Tag.find_by_label(ratings[rand(5)]).id
+  category = Tag.find_by_label(categories[rand(6)]).id
+  story = Story.create({title: title, summary: summary, text: text, user_id: user_id,
     fandom_id: fandom_id, notes: notes, kudos_count: kudos, hits: hits})
+  Tagging.create({story_id: story.id, tag_id: rating})
+  Tagging.create({story_id: story.id, tag_id: category})
 end
 
 genres = ["Genre One", "Genre Two"]
@@ -34,19 +55,19 @@ end
 5000.times do
   user_id = rand(20) + 1
   story_id = rand(100) + 1
-  Kudo.create({user_id: user_id, story_id: story_id})
+  Kudos.create({user_id: user_id, story_id: story_id})
 end
 
-types = ["Ratings", "Warnings", "Categories", "Characters", "Relationships", "Additional"]
+types = ["Characters", "Relationships", "Additional"]
 
-100.times do
+50.times do
   label = Faker::Lorem.words.join(" ")
-  category = types[rand(6)]
+  category = types[rand(3)]
   Tag.create({label: label, category: category})
 end
 
-1000.times do
+666.times do
   story_id = rand(100) + 1
-  tag_id = rand(100) + 1
+  tag_id = rand(56) + 13
   Tagging.create({story_id: story_id, tag_id: tag_id})
 end

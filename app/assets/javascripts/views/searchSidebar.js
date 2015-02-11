@@ -5,7 +5,7 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
   tagName: 'form',
 
   events: {
-    'click input.sort-and-filter': 'submit',
+    'click input.sort-and-filter': "submit",
     'blur input:not(.sort-and-filter)': 'addTag',
     'click button.tag-delete': 'deleteTag',
   },
@@ -25,19 +25,20 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
     var comparator = attributes.sort_criterion
 
     var tags = ""
-    var savedTags = $("form div")
+    var savedTags = $("form .tags-div")
     _(savedTags).each(function(obj){
       var $obj = $(obj)
       var type = $obj.attr("id");
       var tag_array = $obj.text().split(", ");
       _(tag_array).each(function(tag){
         if (tag !== "") {
+          tag = tag.slice(1, tag.length);
           tags = tags + "/" + type + "/" + tag;
         }
       });
     });
 
-    var url = "search/" + comparator + tags
+    var url = "search/" + comparator + "/1" + tags
     Backbone.history.navigate(url, {trigger: true})
   },
 
