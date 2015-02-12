@@ -48,20 +48,9 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
       tagURL = "/" + tags
     }
 
-    if (sortCriterion === "kudos") {
-      sortCriterion = function(a) {
-        return a.get("kudos") * -1;
-      };
-    }
-    if (sortCriterion === "hits") {
-      sortCriterion = function(a) {
-        return a.get("hits") * -1;
-      };
-    }
-
-    var collection = new ArchiveOfOurClone.Collections.Stories([],
-      { comparator: sortCriterion, criterionURL: criterionURL, tagURL: tagURL }).fetch({
-        data: { page: page, tags: tags },
+    new ArchiveOfOurClone.Collections.Stories([],
+      { criterionURL: criterionURL, tagURL: tagURL }).fetch({
+        data: { page: page, tags: tags, sortCriterion: sortCriterion },
         success: that._storyIndex.bind(that),
       });
   },

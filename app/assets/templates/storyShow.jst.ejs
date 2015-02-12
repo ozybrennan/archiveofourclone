@@ -92,7 +92,8 @@ var escapeHTML = (function () {
   <%= story.get("text") %>
 </article>
 <button class="top">Top</button>
-<% if (!story.get("current_user") || !story.kudosUsers || story.kudosUsers.indexOf(story.get("current_user")) === -1) { %>
+<% if (!story.get("current_user") || !story.get("kudosUsers")
+  || story.get("kudosUsers").indexOf(story.get("current_user").username) === -1) { %>
   <button class="kudos">Kudos <3</button>
 <% } else { %>
   <button class="unkudos">Remove Kudos</button>

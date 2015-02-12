@@ -2,21 +2,13 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
 
   template: JST['storyIndex'],
 
-  events: {
-    'click button.next' : "nextPage",
-    'click button.previous' : "previousPage"
-  },
 
   initialize: function() {
 
-   this.collection.each(function(model){
-      var indexItem = new ArchiveOfOurClone.Views.storyIndexItem({ model: model})
-      this.addSubview(".story-index", indexItem);
-    }.bind(this));
-    this.render();
-
     var sidebar = new ArchiveOfOurClone.Views.searchSidebar({ collection: this.collection })
     this.addSubview(".search", sidebar)
+
+    this.listenTo(this.collection, "sync", this.renderWithoutSidebar)
 
   },
 
@@ -26,23 +18,21 @@ ArchiveOfOurClone.Views.storyIndex = Backbone.CompositeView.extend({
     return this;
   },
 
-  previousPage: function() {
-    this.goToPage(-1);
-  },
+  renderWithoutSidebar: function(){
 
-  nextPage: function () {
-    this.goToPage(1);
-  },
+    this.removeSelectorSubviews("header")
+    this.removeSelectorSubviews(".story-index")
 
-  goToPage: function(num) {
-    if (_.isFunction(this.collection.comparator)) {
-      sortCriterion = "kudos";
-    } else {
-      sortCriterion = this.collection.comparator;
-    }
-    var page = this.collection.page + num;
-    var url = "#" + this.collection.criterionURL + page + this.collection.tagURL;
-    Backbone.history.navigate(url, {trigger: true });
-  },
+    var header = new ArchiveOfOurClone.Views.storyIndexHeader({ collection: this.collection })
+    this.addSubview("header", header)
+
+    this.collection.each(function(model){
+      var indexItem = new ArchiveOfOurClone.Views.storyIndexItem({ model: model})
+      this.addSubview(".story-index", indexItem);
+    }.bind(this));
+
+    this.attachSelectorSubviews("header")
+    this.attachSelectorSubviews(".story-index")
+  }
 
 });

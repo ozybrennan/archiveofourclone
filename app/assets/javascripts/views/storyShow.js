@@ -21,7 +21,6 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
 
   render: function(){
     if (this.model.get("hits") && this.hit) {
-      debugger
         this.hit = false
         var hits = this.model.get("hits") + 1
         this.model.save({hits: hits})

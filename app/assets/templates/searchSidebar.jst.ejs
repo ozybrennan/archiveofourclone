@@ -4,9 +4,15 @@
     }
 } %>
 
-<% var tagField = function (tag_name) {
-  return "<div class='tags-div' id='" + tag_name + "'></div> <input type='text' name='tags[" +
-    tag_name +"]' id='" + tag_name + "'><p>"
+<% var tagField = function (tagName) {
+  var tagList = ""
+  if (topTags[tagName]) {
+    _(topTags[tagName]).each(function(tag){
+      tagList = tagList + "<input type='checkbox' value='" + tag[0] +
+      "' name='tags[" + tagName + "][]'><div>" + tag[0] + "</div>"
+    })
+  }
+  return tagList
 } %>
 
 <input type="submit" class="sort-and-filter" value="Sort And Filter">
@@ -18,67 +24,74 @@
   <option value="title" <%= selected("title") %>>Title</option>
   <option value="author_name" <%= selected("author_name") %>>Author</option>
   <option value="kudos" <%= selected("kudos") %>>Kudos</option>
+  <option value="hits" <%= selected("hits") %>>Hits</option>
 </select>
 <p>
+
 <label for="author_name">Author</label><br />
 <%= tagField("author_name") %>
 <label for="fandom_name">Fandom</label><br />
 <%= tagField("fandom_name") %>
+
 <label for="Ratings">Ratings</label><br />
 <div class="item">
-  <div class="rating">Rating</div>
-    <select id="rating" name="story[ratings]">
-      <option value="unrated">Unrated</option>
-      <option value="general">General Audiences</option>
-      <option value="teen">Teen And Up Audiences</option>
-      <option value="mature">Mature</option>
-      <option value="explicit">Explicit</option>
-    </select>
+    <input type="radio" name="tags[Ratings][]" value="all">All Ratings</option>
+    <input type="radio" name="tags[Ratings][]" value="unrated">Unrated</option>
+    <input type="radio" name="tags[Ratings][]" value="general">General Audiences</option>
+    <input type="radio" name="tags[Ratings][]" value="teen">Teen And Up Audiences</option>
+    <input type="radio" name="tags[Ratings][]" value="mature">Mature</option>
+    <input type="radio" name="tags[Ratings][]" value="explicit">Explicit</option>
   </div>
 </div>
+
 <label for="Warnings">Warnings</label><br />
-<div class="item">
 <div class="warning-item">
   <input type="checkbox" value="Creator Chose Not To Use Archive Warnings"
-    name="story[warnings][]" id="chose_not_to">
+    name="tags[Warnings][]" id="chose_not_to">
   <div class="chose_not_to">Creator Chose Not To Use Archive Warnings</div>
 </div>
 <div class="warning-item">
-  <input type="checkbox" value="No Archive Warnings Apply" name="story[warnings][]"
+  <input type="checkbox" value="No Archive Warnings Apply" name="tags[Warnings][]"
     id="none_apply">
   <div class="none_apply">No Archive Warnings Apply</div>
 </div>
 <div class="warning-item">
   <input type="checkbox" value="Graphic Depictions of Violence"
-    name="story[warnings][]" id="violence">
+    name="tags[Warnings][]" id="violence">
   <div class="violence">Graphic Depictions of Violence</div>
 </div>
 <div class="warning-item">
-  <input type="checkbox" value="Major Character Death" name="story[warnings][]"
+  <input type="checkbox" value="Major Character Death" name="tags[Warnings][]"
     id="death">
   <div class="death">Major Character Death</div>
 </div>
 <div class="warning-item">
-  <input type="checkbox" value="Rape"" name="story[warnings][]" id="rape">
+  <input type="checkbox" value="Rape"" name="tags[Warnings][]" id="rape">
   <div class="rape">Rape</div>
 </div>
 <div class="warning-item">
-  <input type="checkbox" value="Underage" name="story[warnings][]" id="warning">
+  <input type="checkbox" value="Underage" name="tags[Warnings][]" id="warning">
   <div class="underage">Underage</div>
 </div>
+
 <label for="Categories">Categories</label><br />
-<select id="category" name="story[categories]">
-  <option>Gen</option>
-  <option>Female/Female</option>
-  <option>Male/Male</option>
-  <option>Female/Male</option>
-  <option>Other</option>
-  <option>Multi</option>
-</select>
+<input type="radio" name="tags[Categories][]" value="all">All Categories
+<input type="radio" name="tags[Categories][]">Gen
+<input type="radio" name="tags[Categories][]">Female/Female
+<input type="radio" name="tags[Categories][]>Male/Male
+<input type="radio" name="tags[Categories][]>Female/Male
+<input type="radio" name="tags[Categories][]>Other
+<input type="radio" name="tags[Categories][]>Multi
+
 <label for="Characters">Characters</label><br />
 <%= tagField("Characters") %>
-<label for="Pairings">Pairings</label><br />
-<%= tagField("Pairings") %>
+<label for="Relationships">Relationships</label><br />
+<%= tagField("Relationships") %>
 <label for="Additional">Additional Tags</label><br />
 <%= tagField("Additional") %>
+
+<label for="autocomplete">Other Tags</label><br />
+<div class='tags-div'></div>
+<input type='text' id='autocomplete' class='add-tag' name="otherTags">
+
 <input type="submit" class="sort-and-filter" value="Sort And Filter">

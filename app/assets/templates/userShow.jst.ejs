@@ -17,3 +17,6 @@
   <div class="works">
   </div>
 </section>
+<% if (user.get("current_user") && user.get("current_user").id === user.get("id")) { %>
+  <button class="delete-user">Delete User</button>
+<% } %>

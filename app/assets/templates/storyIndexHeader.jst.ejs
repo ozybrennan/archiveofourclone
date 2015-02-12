@@ -1,0 +1,19 @@
+  <% if (collection.total_works === 0) { %>
+    No works! Be less picky.
+  <% } else { %>
+    <% var numberWorks = collection.page * 25
+    var lastWorks = numberWorks
+    if (numberWorks > collection.total_works) {
+      lastWorks = collection.total_works;
+    }%>
+    <%= numberWorks - 24 %> - <%= lastWorks %> out of <%= collection.total_works %> Works in
+    <%= collection.topTag %>
+    <% if (collection.page !== 1) { %>
+      <button class="first">First</button>
+      <button class="previous">Previous</button>
+    <% } %>
+    <% if (numberWorks < collection.total_works) { %>
+      <button class="next">Next</button>
+      <button class="last">Last</button>
+    <% } %>
+  <% } %>

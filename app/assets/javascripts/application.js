@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
 //= require underscore
 //= require backbone
-//= require bootstrap
 //= require archive_of_our_clone
 //= require_tree ../templates
 //= require_tree ./utils

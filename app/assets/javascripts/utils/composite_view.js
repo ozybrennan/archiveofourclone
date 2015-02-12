@@ -23,6 +23,21 @@ Backbone.CompositeView = Backbone.View.extend({
     });
   },
 
+  attachSelectorSubviews: function(selector) {
+    var view = this;
+    this.$(selector).empty();
+    _(this.subviews(selector)).each(function(subview){
+      view.attachSubview(selector, subview);
+    });
+  },
+
+  removeSelectorSubviews: function(selector){
+    _(this.subviews(selector)).each(function(subview){
+      subview.remove();
+    }.bind(this));
+    this._subviews[selector] = []
+  },
+
   remove: function() {
     var view = this;
     Backbone.View.prototype.remove.call(this);
@@ -34,9 +49,7 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   removeSubview: function(selector, subview) {
-    // debugger
     subview.remove();
-    debugger
 
     var subviews = this.subviews(selector);
     subviews.splice(subviews.indexOf(subview), 1);

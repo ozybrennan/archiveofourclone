@@ -3,9 +3,9 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
 
   model: ArchiveOfOurClone.Models.Story,
 
-  comparator: 'created_at',
-
   initialize: function(models, options) {
+    var that = this;
+
     if (options) {
       this.tagURL = options.tagURL;
       this.criterionURL = options.criterionURL;
@@ -20,11 +20,12 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
       tags = this.tagURL.split("/");
       _(tags).each(function(tag, index){
         if (tag === "fandom_name") {
-          this.topTag = tags[index + 1]
+          that.topTag = tags[index + 1]
         }
       })
     } else {
-      this.topTag = this.tagURL.split("/")[2];
+      topTag = this.tagURL.split("/")[2];
+      this.topTag = topTag.charAt(0).toUpperCase() + topTag.slice(1);
     }
   },
 
@@ -45,15 +46,15 @@ ArchiveOfOurClone.Collections.Stories = Backbone.Collection.extend({
     return story;
   },
 
-  find_comparator: function(){
-    return this.comparator;
-  },
-
   parse: function (response) {
     this.page = parseInt(response.page)
     this.total_works = parseInt(response.total_works)
     this.total_pages = parseInt(response.total_pages)
     return response.models;
   },
+
+  findComparator: function() {
+    return this.criterionURL.replace("#search/", "")
+  }
 
 });

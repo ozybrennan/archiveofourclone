@@ -3,7 +3,7 @@ ArchiveOfOurClone.Views.storyForm = Backbone.View.extend({
   template: JST['storyForm'],
 
   events: {
-    'submit form': 'submit',
+    'submit form.story-form': 'submit',
     'blur input.freeform-tags': 'addTag',
     'click button.tag-delete': 'deleteTag',
   },
@@ -12,17 +12,15 @@ ArchiveOfOurClone.Views.storyForm = Backbone.View.extend({
     if (!this.model) {
       this.model = new ArchiveOfOurClone.Models.Story();
     }
-    this.listenTo(this.model, "sync", this.render)
+    this.listenTo(this.model, "sync", this.render);
+    $("#filepicker-text").on("fileLoaded", this.readFile);
   },
 
   render: function(){
+    var that = this;
     var content = this.template({story: this.model})
     this.$el.html(content);
     var element = this.$el.find("#filepicker-text")
-    element.type="filepicker-dragdrop";
-    element.onchange = function(e){
-      console.log(JSON.stringify(e.fpfile));
-    };
     filepicker.constructWidget(element);
     return this;
   },
@@ -34,6 +32,18 @@ ArchiveOfOurClone.Views.storyForm = Backbone.View.extend({
     attributes["story"]["ratings"] = [attributes["story"]["ratings"]]
     attributes["story"]["categories"] =[attributes["story"]["categories"]]
 
+    if (attributes["story"]["filepicker-url"]) {
+      filepicker.read(attributes["story"]["filepicker-url"], {asText: true}, function(data) {
+        debugger
+        attributes["story"]["text"].push(data);
+        this.finishSubmit(attributes)
+      }.bind(this))
+    } else {
+      this.finishSubmit(attributes);
+    }
+  },
+
+  finishSubmit: function(attributes) {
     var savedTags = $("form .tags-div")
     _(savedTags).each(function(obj){
       var $obj = $(obj)
@@ -47,16 +57,18 @@ ArchiveOfOurClone.Views.storyForm = Backbone.View.extend({
         }
       });
     });
-    debugger
 
     this.model.save(attributes, {
       success: function(model) {
         Backbone.history.navigate("#stories/" + model.id, {trigger: true})
       },
       error: function(model, response) {
-        debugger
+        $("div.errors").html("<ul class='errors'></ul>")
+        _(response.responseJSON).each(function(error){
+          $("ul.errors").append("<li>" + error + "</li>")
+        })
       }
-    });
+    })
   },
 
   addTag: function(event) {

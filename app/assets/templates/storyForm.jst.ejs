@@ -6,7 +6,8 @@
   <% } %>
 </header>
 <div class="form">
-  <form>
+  <div class="errors"></div>
+  <form class="story-form">
     <div class="item">
       <div class="title">Title</div>
       <input type="text" name="story[title]" id="title" value="<%= story.get("title") %>">
@@ -134,11 +135,15 @@
       <textarea id="notes" name="story[notes]" rows="10" cols="50"><%= story.get("notes") %></textarea>
     </div>
 
-    <div class="item">
+    <% var uploadedFile = function(data) {
+      debugger
+    } %>
+
+    <div class="item story-text">
       <div class="story">Story Text</div>
       <textarea id="story" name="story[text][]" rows="1000" cols="50"><%= story.get("text") %></textarea>
-      <input type="filepicker" data-fp-mimetypes="text/*"
-      data-fp-container="modal" onchange="alert(event.fpfile.url)" id="filepicker-text">
+      <input type="filepicker-dragdrop" data-fp-mimetypes="text/*,application/"
+      data-fp-container="modal" id="filepicker-text" name="story[filepicker-url]">
     </div>
 
     <input type="submit" value="Submit" class="submit">

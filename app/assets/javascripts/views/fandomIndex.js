@@ -14,10 +14,13 @@ ArchiveOfOurClone.Views.fandomIndex = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    debugger
     this.$el.html(this.template());
     this.attachSubviews();
     return this;
+  },
+
+  goToFandomsIndex: function(){
+    Backbone.history.navigate("#fandoms", {trigger: true})
   },
 
 });

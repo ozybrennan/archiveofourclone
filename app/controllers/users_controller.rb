@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_current_user, only: :destroy
+  before_action :require_current_user!, only: :destroy
 
   def index
     @users = User.all
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to root_path
+    redirect_to root_url, status: :see_other
   end
 
 end

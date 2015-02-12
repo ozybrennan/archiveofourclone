@@ -5,7 +5,8 @@ ArchiveOfOurClone.Views.userIndexItem = Backbone.View.extend({
   className: "user-index-box",
 
   events: {
-    'click a.user' : 'showUser'
+    'click a.user' : 'showUser',
+    'click a.story-link' : 'showUserStories'
   },
 
   initialize: function () {
@@ -22,5 +23,10 @@ ArchiveOfOurClone.Views.userIndexItem = Backbone.View.extend({
     var url = "#users/" + this.model.id
     Backbone.history.navigate(url, {trigger: true})
   },
+
+  showUserStories: function(event){
+    var url = "#search/created_at/1/author_name/" + this.model.get("username")
+    Backbone.history.navigate(url, {trigger: true})
+  }
 
 })

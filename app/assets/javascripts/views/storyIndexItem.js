@@ -22,6 +22,7 @@ ArchiveOfOurClone.Views.storyIndexItem = Backbone.View.extend({
   render: function(){
     var content = this.template({story: this.model, user: this.user})
     this.$el.html(content);
+    this.$el.find("div.tags").html(this.$el.find("div.tags").html().slice(0, -3))
     return this;
   },
 
@@ -53,7 +54,7 @@ ArchiveOfOurClone.Views.storyIndexItem = Backbone.View.extend({
 
   deleteStory: function(event) {
     event.preventDefault();
-    this.model.remove();
+    this.model.destroy();
   },
 
 })

@@ -44,7 +44,7 @@ var escapeHTML = (function () {
     <%= story.escape("fandom_name") %>
   </a>
 </div> <p>
-<% if (user && this.user.get("current_user") && user.get("id") === this.user.get("current_user").id) { %>
+<% if (user && user.get("current_user") && user.get("id") === this.user.get("current_user").id) { %>
 <div class="buttons">
   <button class="edit">Edit Story</button>
   <button class="delete">Delete Story</button>
@@ -62,4 +62,5 @@ var escapeHTML = (function () {
 <div class="stats">
   Words: <%= story.escape("word_count") %>
   Kudos: <%= story.escape("kudos") %>
+  Hits: <%= story.escape("hits") %>
 </div>
