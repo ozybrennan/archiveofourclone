@@ -34,7 +34,6 @@ ArchiveOfOurClone.Views.storyForm = Backbone.View.extend({
 
     if (attributes["story"]["filepicker-url"]) {
       filepicker.read(attributes["story"]["filepicker-url"], {asText: true}, function(data) {
-        debugger
         attributes["story"]["text"].push(data);
         this.finishSubmit(attributes)
       }.bind(this))
