@@ -1,7 +1,5 @@
 # Archive of Our Clone
 
-[Heroku link][heroku]
-
 [heroku]: http://archiveofourclone.herokuapp.com
 
 ## Minimum Viable Product
@@ -40,10 +38,3 @@ Archive of Our Clone is a clone of Archive of Our Own, a story hosting website, 
 - [ ] Allow users to mark stories complete
 - [ ] Notification bar (comments, kudos, stories you've saved updating)
 - [ ] Title search, author search, keyword search
-
-
-[phase-one]: ./docs/phases/phase1.md
-[phase-two]: ./docs/phases/phase2.md
-[phase-three]: ./docs/phases/phase3.md
-[phase-four]: ./docs/phases/phase4.md
-[phase-five]: ./docs/phases/phase5.md
