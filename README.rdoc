@@ -1,28 +1,49 @@
-== README
+# Archive of Our Clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Heroku link][heroku]
 
-Things you may want to cover:
+[heroku]: http://archiveofourclone.herokuapp.com
 
-* Ruby version
+## Minimum Viable Product
+Archive of Our Clone is a clone of Archive of Our Own, a story hosting website, built on Rails and Backbone. Users can:
 
-* System dependencies
+- Create accounts and log in
+- Create and tag stories
+- View stories
+- Search for stories
 
-* Configuration
+### To Do: 
+[ ] Home page
+[ ] Nav bar
+[ ] Autocomplete
+[ ] Kudos animation
+[ ] Wiggling tags 
+[ ] Stories slide in from the bottom
+[ ] Input boxes highlight themselves
+[ ] Check links
+[ ] CSS
+[ ] Seed data
 
-* Database creation
+### Bonus Features (TBD)
+- [ ] Prompt users with a tag when they've written in a couple of letters
+- [X] List the top ten tags in each type in the search bar
+- [X] Search remembers tags
+- [ ] Fancier profile pages (bios? avatars?)
+- [ ] Modals
+- [ ] Save a story to read later
+- [ ] Comments
+- [ ] Chapters
+- [ ] Story series
+- [ ] Story collections (e.g. all stories written for a particular challenge)
+- [ ] Let stories be in more than one fandom
+- [ ] Let stories have more than one writer
+- [ ] Allow users to mark stories complete
+- [ ] Notification bar (comments, kudos, stories you've saved updating)
+- [ ] Title search, author search, keyword search
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+[phase-one]: ./docs/phases/phase1.md
+[phase-two]: ./docs/phases/phase2.md
+[phase-three]: ./docs/phases/phase3.md
+[phase-four]: ./docs/phases/phase4.md
+[phase-five]: ./docs/phases/phase5.md
