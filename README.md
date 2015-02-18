@@ -1,5 +1,7 @@
 # Archive of Our Clone
 
+[Heroku link] [heroku]
+
 [heroku]: http://archiveofourclone.herokuapp.com
 
 ## Minimum Viable Product
@@ -11,16 +13,16 @@ Archive of Our Clone is a clone of Archive of Our Own, a story hosting website, 
 - Search for stories
 
 ### To Do: 
-[ ] Home page
-[ ] Nav bar
-[ ] Autocomplete
-[ ] Kudos animation
-[ ] Wiggling tags 
-[ ] Stories slide in from the bottom
-[ ] Input boxes highlight themselves
-[ ] Check links
-[ ] CSS
-[ ] Seed data
+- [ ] Home page
+- [ ] Nav bar
+- [ ] Autocomplete
+- [ ] Kudos animation
+- [ ] Wiggling tags 
+- [ ] Stories slide in from the bottom
+- [ ] Input boxes highlight themselves
+- [ ] Check links
+- [ ] CSS
+- [ ] Seed data
 
 ### Bonus Features (TBD)
 - [ ] Prompt users with a tag when they've written in a couple of letters
