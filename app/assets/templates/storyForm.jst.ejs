@@ -72,27 +72,17 @@
           id="death" <%= checked("Major Character Death") %>>
         <div class="death">Major Character Death</div>
       </div>
-      <div class="warning-item">
-        <input type="checkbox" value="Rape"" name="story[warnings][]" id="rape"
-          <%= checked("Rape") %>>
-        <div class="rape">Rape</div>
-      </div>
-      <div class="warning-item">
-        <input type="checkbox" value="Underage" name="story[warnings][]" id="warning"
-          <%= checked("Underage") %>>
-        <div class="underage">Underage</div>
-      </div>
     </div>
 
     <div class="item">
       <div class="category">Categories</div>
       <select id="category" name="story[categories]">
-        <option <%= selected("Categories", "Gen") %>>Gen</option>
-        <option <%= selected("Categories", "Female/Female") %>>Female/Female</option>
-        <option <%= selected("Categories", "Male/Male") %>>Male/Male</option>
-        <option <%= selected("Categories", "Female/Male") %>>Female/Male</option>
+        <option <%= selected("Categories", "British") %>British</option>
+        <option <%= selected("Categories", "American") %>>American</option>
+        <option <%= selected("Categories", "Russian") %>>Russian</option>
+        <option <%= selected("Categories", "French") %>>French</option>
+        <option <%= selected("Categories", "German") %>>German</option>
         <option <%= selected("Categories", "Other") %>>Other</option>
-        <option <%= selected("Categories", "Multi") %>>Multi</option>
       </select>
     </div>
 
