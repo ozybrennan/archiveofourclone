@@ -1,0 +1,16 @@
+<header>Welcome to Archive of Our Clone!</header>
+<p>
+We are non-profit, non-commercial archive for public-domain stories. We currently
+have <%= model.escape("total_fandoms") %> genres, <%= model.escape("total_users") %>
+users, and <%= model.escape("total_works") %> works.
+</p><p>
+Feel free to log in, register, or try it out with a guest login. All stories and
+authors are welcome!
+</p><p>
+The Archive of our Clone is a project of the Organization for Transformative Clones.
+</p>
+<% if (!model.get("current_user")) { %>
+  <a href="/sessions/new"><button>Log In</button></a>
+  <a href="/users/new"><button>Sign Up</button></a>
+  <a href="sessions/guest"><button>Guest Log In</button></a>
+<% } %>

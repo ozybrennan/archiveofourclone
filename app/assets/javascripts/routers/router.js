@@ -6,6 +6,7 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
+    '': 'homePage',
     'search/:sortCriterion/:page(/*tags)': 'storySearch',
     'stories/new': 'storyForm',
     'stories/:id': 'storyShow',
@@ -15,6 +16,13 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
     'fandoms': 'categoryIndex',
     'fandoms/:name': 'categoryShow',
     ':page': 'baseStoryIndex',
+  },
+
+  homePage: function() {
+    var model = new ArchiveOfOurClone.Models.Home();
+    model.fetch();
+    var view = new ArchiveOfOurClone.Views.homepage({model: model});
+    this._swapViews(view);
   },
 
   baseStoryIndex: function(page) {

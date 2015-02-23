@@ -1,0 +1,17 @@
+<nav class="header-nav clearfix">
+  <ul class="header-list clearfix">
+    <li>
+      <a href="#" class="genres">Genres</a>
+      <ul class="header-genres">
+      <% _(categories).each(function(category) { %>
+          <li><a href="#" class="genre"><%= category.category_name %></a></li>
+        <% }) %>
+      </ul>
+    </li>
+    <li><a href="#" class="users">Users</a></li>
+    <li><a href="#" class="works">Works</a></li>
+    <% if (current_user) { %>
+      <li><a href="#" class="create">Create Story</a></li>
+    <% } %>
+  </ul>
+</nav>

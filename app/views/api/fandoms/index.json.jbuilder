@@ -17,3 +17,5 @@ json.categories categories do |category|
     json.id fandom[2]
   end
 end
+
+json.current_user current_user

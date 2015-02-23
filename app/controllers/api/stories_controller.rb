@@ -2,7 +2,13 @@ module Api
 
   class StoriesController < ApplicationController
 
-    before_action :require_current_user!, except: [:index, :show, :update]
+    before_action :require_current_user!, except: [:home, :index, :show, :update]
+
+    def home
+      @total_fandoms = Fandom.all.length
+      @total_works = Story.all.length
+      @total_users = User.all.length
+    end
 
     def index
       if params[:tags] && params[:tags] != ""
@@ -26,9 +32,6 @@ module Api
       @page = params[:page]
 
       render :index
-    end
-
-    def new
     end
 
     def show

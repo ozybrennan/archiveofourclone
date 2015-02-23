@@ -24,4 +24,10 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def guest
+    @user = User.find_by_credentials("guest", "password")
+    log_in!(@user)
+    redirect_to root_path
+  end
+
 end

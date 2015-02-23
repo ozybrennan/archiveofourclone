@@ -7,20 +7,20 @@ json.author do
   json.id story.user.id
 end
 
-json.fandom do
-  json.name story.fandom.name
-  json.category story.fandom.category
-  json.id story.fandom.id
-end
+# json.fandom do
+#   json.name story.fandom.name
+#   json.category story.fandom.category
+#   json.id story.fandom.id
+# end
 
 json.tags story.tags do |tag|
   json.label tag.label
   json.category tag.category
 end
 
-json.kudos_users story.kudos_users do |user|
-  json.username user.username
-end
+# json.kudos_users story.kudos_users do |user|
+#   json.username user.username
+# end
 
 if current_user_needed && current_user
 
