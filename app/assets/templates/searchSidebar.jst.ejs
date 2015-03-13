@@ -8,14 +8,14 @@
   var tagList = ""
   if (topTags[tagName]) {
     _(topTags[tagName]).each(function(tag){
-      tagList = tagList + "<input type='checkbox' value='" + tag[0] +
+      tagList = tagList + "<input class='form-control' type='checkbox' value='" + tag[0] +
       "' name='tags[" + tagName + "][]'><div>" + tag[0] + "</div>"
     })
   }
   return tagList
 } %>
 
-<input type="submit" class="sort-and-filter" value="Sort And Filter">
+<input type="submit" class="sort-and-filter btn btn-primary" value="Sort And Filter">
 <p>
 <select name="sort_criterion">
   <option value="updated_at" <%= selected("updated_at") %>>Date Updated</option>
@@ -28,62 +28,64 @@
 </select>
 <p>
 
-<label for="author_name">Author</label><br />
-<%= tagField("author_name") %>
-<label for="fandom_name">Fandom</label><br />
-<%= tagField("fandom_name") %>
-
-<label for="Ratings">Ratings</label><br />
-<div class="item">
-    <input type="radio" name="tags[Ratings][]" value="all">All Ratings</option>
-    <input type="radio" name="tags[Ratings][]" value="unrated">Unrated</option>
-    <input type="radio" name="tags[Ratings][]" value="general">General Audiences</option>
-    <input type="radio" name="tags[Ratings][]" value="teen">Teen And Up Audiences</option>
-    <input type="radio" name="tags[Ratings][]" value="mature">Mature</option>
-    <input type="radio" name="tags[Ratings][]" value="explicit">Explicit</option>
-  </div>
+<div class="form-group">
+  <label for="author_name">Author</label><br />
+  <input class="form-control" type="text" name="author_name" id="author_name">
+</div>
+<div class="form-group">
+  <label for="fandom_name">Fandom</label><br />
+  <input class="form-control" type="text" name="fandom_name" id="fandom_name">
 </div>
 
-<label for="Warnings">Warnings</label><br />
-<div class="warning-item">
-  <input type="checkbox" value="Creator Chose Not To Use Archive Warnings"
+<div class="form-group">
+  <label for="Ratings">Ratings</label><br />
+  <input class="form-control" type="radio" name="tags[Ratings][]" value="all">All Ratings</option>
+  <input class="form-control" type="radio" name="tags[Ratings][]" value="unrated">Unrated</option>
+  <input class="form-control" type="radio" name="tags[Ratings][]" value="general">General Audiences</option>
+  <input class="form-control" type="radio" name="tags[Ratings][]" value="teen">Teen And Up Audiences</option>
+  <input class="form-control" type="radio" name="tags[Ratings][]" value="mature">Mature</option>
+  <input class="form-control" type="radio" name="tags[Ratings][]" value="explicit">Explicit</option>
+</div>
+
+<div class="form-group">
+  <label for="Warnings">Warnings</label>
+  <input class="form-control" type="checkbox" value="Creator Chose Not To Use Archive Warnings"
     name="tags[Warnings][]" id="chose_not_to">
-  <div class="chose_not_to">Creator Chose Not To Use Archive Warnings</div>
-</div>
-<div class="warning-item">
-  <input type="checkbox" value="No Archive Warnings Apply" name="tags[Warnings][]"
-    id="none_apply">
-  <div class="none_apply">No Archive Warnings Apply</div>
-</div>
-<div class="warning-item">
-  <input type="checkbox" value="Graphic Depictions of Violence"
-    name="tags[Warnings][]" id="violence">
-  <div class="violence">Graphic Depictions of Violence</div>
-</div>
-<div class="warning-item">
-  <input type="checkbox" value="Major Character Death" name="tags[Warnings][]"
-    id="death">
-  <div class="death">Major Character Death</div>
+  Creator Chose Not To Use Archive Warnings
+  <input class="form-control" type="checkbox" value="No Archive Warnings Apply" name="tags[Warnings][]"
+    id="none_apply">No Archive Warnings Apply
+  <input class="form-control" type="checkbox" value="Graphic Depictions of Violence"
+    name="tags[Warnings][]" id="violence">Graphic Depictions of Violence
+  <input class="form-control" type="checkbox" value="Major Character Death" name="tags[Warnings][]"
+    id="death">Major Character Death
 </div>
 
-<label for="Categories">Categories</label><br />
-<input type="radio" name="tags[Categories][]" value="all">All Categories
-<input type="radio" name="tags[Categories][]">British
-<input type="radio" name="tags[Categories][]">American
-<input type="radio" name="tags[Categories][]">Russian
-<input type="radio" name="tags[Categories][]">French
-<input type="radio" name="tags[Categories][]">German
-<input type="radio" name="tags[Categories][]">Other
+<div class="form-group">
+  <label for="Categories">Categories</label><br />
+  <input class="form-control" type="radio" name="tags[Categories][]" value="all">All Categories
+  <input class="form-control" type="radio" name="tags[Categories][]">British
+  <input class="form-control" type="radio" name="tags[Categories][]">American
+  <input class="form-control" type="radio" name="tags[Categories][]">Russian
+  <input class="form-control" type="radio" name="tags[Categories][]">French
+  <input class="form-control" type="radio" name="tags[Categories][]">German
+  <input class="form-control" type="radio" name="tags[Categories][]">Other
+</div>
 
-<label for="Characters">Characters</label><br />
-<%= tagField("Characters") %>
-<label for="Relationships">Relationships</label><br />
-<%= tagField("Relationships") %>
-<label for="Additional">Additional Tags</label><br />
-<%= tagField("Additional") %>
+<div class="form-group">
+  <label for="Characters">Characters</label>
+  <%= tagField("Characters") %>
+</div>
+<div class="form-group">
+  <label for="Relationships">Relationships</label>
+  <%= tagField("Relationships") %>
+</div>
+<div class="form-group">
+  <label for="Additional">Additional Tags</label>
+  <%= tagField("Additional") %>
+</div>
 
-<label for="autocomplete">Other Tags</label><br />
+<label for="autocomplete">Other Tags</label>
 <div class='tags-div'></div>
-<input type='text' id='autocomplete' class='add-tag' name="otherTags">
+<input class="form-control" type='text' id='autocomplete' class='add-tag' name="otherTags">
 
-<input type="submit" class="sort-and-filter" value="Sort And Filter">
+<input type="submit" class="sort-and-filter btn btn-primary" value="Sort And Filter">

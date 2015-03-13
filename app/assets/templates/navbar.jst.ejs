@@ -1,17 +1,30 @@
-<nav class="header-nav clearfix">
-  <ul class="header-list clearfix">
-    <li>
-      <a href="#" class="genres">Genres</a>
-      <ul class="header-genres">
-      <% _(categories).each(function(category) { %>
-          <li><a href="#" class="genre"><%= category.category_name %></a></li>
-        <% }) %>
-      </ul>
-    </li>
-    <li><a href="#" class="users">Users</a></li>
-    <li><a href="#" class="works">Works</a></li>
-    <% if (current_user) { %>
-      <li><a href="#" class="create">Create Story</a></li>
-    <% } %>
-  </ul>
+<nav>
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="collapse navbar-collapse" id="navbar-collapse-1">
+    <ul class="nav nav-pills">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          Genres<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="#" class="genres">All Genres</a></li>
+        <% _(categories).each(function(category) { %>
+            <li><a href="#" class="genre"><%= category.category_name %></a></li>
+          <% }) %>
+        </ul>
+      </li>
+      <li><a href="#" class="users">Users</a></li>
+      <li><a href="#" class="works">Works</a></li>
+      <% if (current_user) { %>
+        <li><a href="#" class="create">Create Story</a></li>
+      <% } %>
+    </ul>
+  </div>
 </nav>

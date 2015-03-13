@@ -1,4 +1,7 @@
-<div class="user-item-name">
-  <a href="javascript:void(0)" class="user main-link"><%= user.escape("username") %></a>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-1">
+    <a href="javascript:void(0)" class="user main-link"><%= user.escape("username") %></a><br />
+    <a href="javascript:void(0)" class="story-link"><%= user.get("stories").length %> works</a>
+  </div>
 </div>
-<a href="javascript:void(0)" class="story-link"><%= user.get("stories").length %> works</a>
+<p>

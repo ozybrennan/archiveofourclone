@@ -5,137 +5,132 @@
     Create Work
   <% } %>
 </header>
-<div class="form">
-  <div class="errors"></div>
-  <form class="story-form">
-    <div class="item">
-      <div class="title">Title</div>
-      <input type="text" name="story[title]" id="title" value="<%= story.get("title") %>">
-    </div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-1">
+    <div class="errors"></div>
+    <form class="story-form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="story[title]" id="title" value="<%= story.get("title") %>">
+      </div>
 
-    <div class="item">
-      <div class="fandom">Fandom</div>
-      <input type="text" name="story[fandom]" id="fandom" value="<%=story.get("fandom_name") %>">
-    </div>
+      <div class="form-group">
+        <label for="fandom">Fandom</label>
+        <input class="form-control" type="text" name="story[fandom]" id="fandom" value="<%=story.get("fandom_name") %>">
+      </div>
 
-    <div class="item">
-      <div class="genre">Fandom Genre (if new fandom)</div>
-      <input type="text" name="story[genre]" id="genre">
-    </div>
+      <div class="form-group">
+        <label for="genre">Fandom Genre (if new fandom)</label>
+        <input class="form-control" type="text" name="story[genre]" id="genre">
+      </div>
 
-    <% var selected = function (type, value) {
-        if (story.get(type) && story.get(type)[0] === value) {
-          return "selected"
-        }
-    } %>
+      <% var selected = function (type, value) {
+          if (story.get(type) && story.get(type)[0] === value) {
+            return "selected"
+          }
+      } %>
 
-    <% var checked = function (value) {
-      checked_warnings = [];
-      _(story.get("Warnings")).each(function(tag){
-        checked_warnings.push(tag);
-      });
-      if (checked_warnings.indexOf(value) > -1) {
-        return "checked";
-        }
-    } %>
+      <% var checked = function (value) {
+        checked_warnings = [];
+        _(story.get("Warnings")).each(function(tag){
+          checked_warnings.push(tag);
+        });
+        if (checked_warnings.indexOf(value) > -1) {
+          return "checked";
+          }
+      } %>
 
-    <div class="item">
-      <div class="rating">Rating</div>
-      <select id="rating" name="story[ratings]">
-        <option value="unrated" <%= selected("Ratings", "unrated") %>>Unrated</option>
-        <option value="general"<%= selected("Ratings", "general") %>>General Audiences</option>
-        <option value="teen"<%= selected("Ratings", "teen") %>>Teen And Up Audiences</option>
-        <option value="mature"<%= selected("Ratings", "mature") %>>Mature</option>
-        <option value="explicit"<%= selected("Ratings", "explicit") %>>Explicit</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" name="story[ratings]">
+          <option value="unrated" <%= selected("Ratings", "unrated") %>>Unrated</option>
+          <option value="general"<%= selected("Ratings", "general") %>>General Audiences</option>
+          <option value="teen"<%= selected("Ratings", "teen") %>>Teen And Up Audiences</option>
+          <option value="mature"<%= selected("Ratings", "mature") %>>Mature</option>
+          <option value="explicit"<%= selected("Ratings", "explicit") %>>Explicit</option>
+        </select>
+      </div>
 
-    <div class="item">
-      <div class="warning">Warnings</div>
-      <div class="warning-item">
-        <input type="checkbox" value="Creator Chose Not To Use Archive Warnings"
+      <div class="form-group">
+        <label for="warning">Warnings</label>
+
+        <input class="form-control" type="checkbox" value="Creator Chose Not To Use Archive Warnings"
           name="story[warnings][]" id="chose_not_to" <%= checked("Creator Chose Not To Use Archive Warnings") %>>
-        <div class="chose_not_to">Creator Chose Not To Use Archive Warnings</div>
-      </div>
-      <div class="warning-item">
-        <input type="checkbox" value="No Archive Warnings Apply" name="story[warnings][]"
+        Creator Chose Not To Use Archive Warnings
+
+        <input class="form-control" type="checkbox" value="No Archive Warnings Apply" name="story[warnings][]"
           id="none_apply" <%= checked("No Archive Warnings Apply") %>>
-        <div class="none_apply">No Archive Warnings Apply</div>
-      </div>
-      <div class="warning-item">
-        <input type="checkbox" value="Graphic Depictions of Violence"
+        No Archive Warnings Apply
+
+        <input class="form-control" type="checkbox" value="Graphic Depictions of Violence"
           name="story[warnings][]" id="violence" <%= checked("Graphic Depictions of Violence") %>>
-        <div class="violence">Graphic Depictions of Violence</div>
-      </div>
-      <div class="warning-item">
-        <input type="checkbox" value="Major Character Death" name="story[warnings][]"
+        Graphic Depictions of Violence
+
+        <input class="form-control" type="checkbox" value="Major Character Death" name="story[warnings][]"
           id="death" <%= checked("Major Character Death") %>>
-        <div class="death">Major Character Death</div>
+        Major Character Death
+
       </div>
-    </div>
 
-    <div class="item">
-      <div class="category">Categories</div>
-      <select id="category" name="story[categories]">
-        <option <%= selected("Categories", "British") %>British</option>
-        <option <%= selected("Categories", "American") %>>American</option>
-        <option <%= selected("Categories", "Russian") %>>Russian</option>
-        <option <%= selected("Categories", "French") %>>French</option>
-        <option <%= selected("Categories", "German") %>>German</option>
-        <option <%= selected("Categories", "Other") %>>Other</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="category">Categories</label>
+        <select id="category" name="story[categories]">
+          <option <%= selected("Categories", "British") %>British</option>
+          <option <%= selected("Categories", "American") %>>American</option>
+          <option <%= selected("Categories", "Russian") %>>Russian</option>
+          <option <%= selected("Categories", "French") %>>French</option>
+          <option <%= selected("Categories", "German") %>>German</option>
+          <option <%= selected("Categories", "Other") %>>Other</option>
+        </select>
+      </div>
 
-    <% var tags = function(type){
-      var tags = ""
-      _(story.get(type)).each(function(tag) {
-          value = tag
-          var button = "<button class='tag-delete' data-id ='" + value + "'>X</button>"
-          var tag = "<div class='" + value + "'>" + button + value + ", </div>"
-          tags = tags + tag
-        })
-      return tags
-    } %>
+      <% var tags = function(type){
+        var tags = ""
+        _(story.get(type)).each(function(tag) {
+            value = tag
+            var button = "<button class='tag-delete' data-id ='" + value + "'>X</button>"
+            var tag = "<div class='" + value + "'>" + button + value + ", </div>"
+            tags = tags + tag
+          })
+        return tags
+      } %>
 
-    <div class="item">
-      <div class="characters">Characters</div>
-      <div class="tags-div" id="characters"><%= tags("Characters") %></div>
-      <input type="text" id="characters" name="story[characters]" class="freeform-tags">
-    </div>
+      <div class="form-group">
+        <label for="characters">Characters</label>
+        <div class="tags-div" id="characters"><%= tags("Characters") %></div>
+        <input class="form-control" type="text" id="characters" name="story[characters]" class="freeform-tags">
+      </div>
 
-    <div class="item">
-      <div class="relationships">Relationships</div>
-      <div class="tags-div" id="relationships"><%= tags("Relationships") %></div>
-      <input type="text" id="relationships" name="story[relationships]" class="freeform-tags">
-    </div>
+      <div class="form-group">
+        <label for="relationships">Relationships</label>
+        <div class="tags-div" id="relationships"><%= tags("Relationships") %></div>
+        <input class="form-control" type="text" id="relationships" name="story[relationships]" class="freeform-tags">
+      </div>
 
-    <div class="item">
-      <div class="additional">Additional Tags</div>
-      <div class="tags-div" id="additional"><%= tags("Additional") %></div>
-      <input type="text" id="additional" name="story[additional]" class="freeform-tags">
-    </div>
+      <div class="form-group">
+        <label for="additional">Additional Tags</label>
+        <div class="tags-div" id="additional"><%= tags("Additional") %></div>
+        <input class="form-control" type="text" id="additional" name="story[additional]" class="freeform-tags">
+      </div>
 
-    <div class="item">
-      <div class="summary">Summary</div>
-      <textarea id="summary" name="story[summary]" rows="10" cols="50"><%= story.get("summary") %></textarea>
-    </div>
+      <div class="form-group">
+        <label for="summary">Summary</label>
+        <textarea id="summary" name="story[summary]" rows="10" cols="50"><%= story.get("summary") %></textarea>
+      </div>
 
-    <div class="item">
-      <div class="notes">Notes</div>
-      <textarea id="notes" name="story[notes]" rows="10" cols="50"><%= story.get("notes") %></textarea>
-    </div>
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="story[notes]" rows="10" cols="50"><%= story.get("notes") %></textarea>
+      </div>
 
-    <% var uploadedFile = function(data) {
-      debugger
-    } %>
+      <div class="form-group story-text">
+        <label for="story">Story Text</label>
+        <textarea id="story" name="story[text][]" rows="15" cols="50"><%= story.get("text") %></textarea>
+        <input type="filepicker-dragdrop" data-fp-mimetypes="text/*,application/"
+        data-fp-container="modal" id="filepicker-text" name="story[filepicker-url]">
+      </div>
 
-    <div class="item story-text">
-      <div class="story">Story Text</div>
-      <textarea id="story" name="story[text][]" rows="1000" cols="50"><%= story.get("text") %></textarea>
-      <input type="filepicker-dragdrop" data-fp-mimetypes="text/*,application/"
-      data-fp-container="modal" id="filepicker-text" name="story[filepicker-url]">
-    </div>
-
-    <input type="submit" value="Submit" class="submit">
-  </form>
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+  </div>
 </div>

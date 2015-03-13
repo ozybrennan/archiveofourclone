@@ -1,12 +1,14 @@
-<a href="javascript:void(0)" class="category-list-name"><%= category.category_name %></a>
-<div class="index-smaller-fandom-box">
-  <% var length = category.fandom.length < 5 ? category.fandom.length : 5 %>
-  <% for (var i = 0; i < length; i++) { %>
-    <% var fandom = category.fandom[i] %>
-    <a href="javascript:void(0)" class="fandom-list-name">
-      <%= fandom.name %>
-    </a>
-      (<%= fandom.story_count %>)
-    <p>
-  <% } %>
-</div>
+
+  <div class="col-xs-4 col-xs-offset-1">
+    <h2><a href="javascript:void(0)" class="category-list-name"><%= category.category_name %></a></h2>
+    <br />
+    <% var length = category.fandom.length < 5 ? category.fandom.length : 5 %>
+    <% for (var i = 0; i < length; i++) { %>
+      <% var fandom = category.fandom[i] %>
+      <a href="javascript:void(0)" class="fandom-list-name">
+        <%= fandom.name %>
+      </a>
+        (<%= fandom.story_count %>)
+      <p>
+    <% } %>
+  </div>

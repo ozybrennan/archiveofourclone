@@ -43,7 +43,7 @@ var escapeHTML = (function () {
   <a href='javascript:void(0)' class='search-link fandom_name'>
     <%= story.escape("fandom_name") %>
   </a>
-</div> <p>
+</div>
 <% if (user && user.get("current_user") && user.get("id") === this.user.get("current_user").id) { %>
 <div class="buttons">
   <button class="edit">Edit Story</button>
@@ -64,3 +64,4 @@ var escapeHTML = (function () {
   Kudos: <%= story.escape("kudos") %>
   Hits: <%= story.escape("hits") %>
 </div>
+<p>

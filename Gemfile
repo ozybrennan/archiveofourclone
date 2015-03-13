@@ -29,6 +29,8 @@ gem 'backbone-on-rails'
 
 gem 'bootstrap-sass'
 
+gem 'bootswatch-rails'
+
 gem 'font-awesome-rails'
 
 gem 'jquery-ui-rails'
