@@ -11,14 +11,19 @@
   <script>
     filepicker.setKey("<%= ENV['FILEPICKER_API_KEY'] %>");
   </script>
+  <div class="row">
+    <div class="h2 col-xs-4">Archive of our Own</div>
 
-  <% if current_user %>
-    <%= current_user.username %>
-    <%= button_to "Log Out", sessions_url, method: :delete %>
-  <% else %>
-    <%= button_to "Log In", new_sessions_url, method: :get %>
-    <%= button_to "Sign Up", new_user_url, method: :get %>
-  <% end %>
+    <div class="col-xs-4 col-xs-offset-4">
+      <% if current_user %>
+        <%= current_user.username %>
+        <%= button_to "Log Out", sessions_url, method: :delete %>
+      <% else %>
+        <%= button_to "Log In", new_sessions_url, method: :get %>
+        <%= button_to "Sign Up", new_user_url, method: :get %>
+      <% end %>`
+    </div>
+  </div>
 
   <%= yield %>
 

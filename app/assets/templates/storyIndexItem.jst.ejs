@@ -24,8 +24,8 @@ var escapeHTML = (function () {
 
 %>
 
-<div class="clearfix">
-  <div class="index-item-name">
+<div>
+  <h4>
     <a href="javascript:void(0)" class="main-link index-title" data-id="<%= story.escape("id") %>">
       <%=story.escape("title") %>
     </a>
@@ -33,19 +33,19 @@ var escapeHTML = (function () {
     <a href="javascript:void(0)" class="main-link index-author" data-id="<%= story.get("author").id %>">
       <%=story.escape("author_name") %>
     </a>
-  </div>
-  <div class="small-date">
+  </h4>
+  <div class="small">
     <% var date = new Date(story.escape("updated_at")) %>
     <%= moment(date).format("D MMM YYYY") %>
   </div>
 </div>
-<div class="fandom">
+<div>
   <a href='javascript:void(0)' class='search-link fandom_name'>
     <%= story.escape("fandom_name") %>
   </a>
 </div>
 <% if (user && user.get("current_user") && user.get("id") === this.user.get("current_user").id) { %>
-<div class="buttons">
+<div>
   <button class="edit">Edit Story</button>
   <button class="delete">Delete Story</button>
 </div>
@@ -56,12 +56,13 @@ var escapeHTML = (function () {
   <%= factBoxSection("Characters") %>
   <%= factBoxSection("Additional") %>
 </div>
-<div class="summary">
+<div>
   <%= story.escape("summary") %>
 </div>
-<div class="stats">
+<div class="small">
   Words: <%= story.escape("word_count") %>
   Kudos: <%= story.escape("kudos") %>
   Hits: <%= story.escape("hits") %>
 </div>
-<p>
+<p></p>
+<p></p>

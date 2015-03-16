@@ -1,10 +1,10 @@
-<header class="form-header">
+<h1>
   <% if (story.get("id")) { %>
     Edit Work
   <% } else { %>
     Create Work
   <% } %>
-</header>
+</h1>
 <div class="row">
   <div class="col-xs-4 col-xs-offset-1">
     <div class="errors"></div>
@@ -41,7 +41,7 @@
       } %>
 
       <div class="form-group">
-        <label for="rating">Rating</label>
+        <label for="rating">Rating</label><br />
         <select id="rating" name="story[ratings]">
           <option value="unrated" <%= selected("Ratings", "unrated") %>>Unrated</option>
           <option value="general"<%= selected("Ratings", "general") %>>General Audiences</option>
@@ -73,7 +73,7 @@
       </div>
 
       <div class="form-group">
-        <label for="category">Categories</label>
+        <label for="category">Categories</label> <br />
         <select id="category" name="story[categories]">
           <option <%= selected("Categories", "British") %>British</option>
           <option <%= selected("Categories", "American") %>>American</option>

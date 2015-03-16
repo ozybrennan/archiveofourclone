@@ -5,7 +5,7 @@ var factBoxSection = function(name, type) {
       if (story.get(type).length > 1) {
         name = name + "s"
       }
-      var startCode = "<div class='superclass'><div class='column-1'>" + name + ": </div><div class='column-2'>";
+      var startCode = "<div><div class='col-xs-4'>" + name + ": </div><div class='col-xs-8'>";
       var endCode = "</div></div>";
       var tagCode = "";
       _(tags).each(function(tag){
@@ -19,7 +19,7 @@ var factBoxSection = function(name, type) {
 var fandomSection = function() {
   if (story.get("fandom_name")) {
     var fandom = story.escape("fandom_name");
-    var startCode = "<div class='superclass'><div class='column-1'>Fandom: </div><div class='column-2'>";
+    var startCode = "<div><div class='col-xs-4'>Fandom: </div><div class='col-xs-8'>";
     var endCode = "</div></div>";
     var tagCode = "<a href='javascript:void(0)' class='search-link fandom_name'>" + fandom + "</a>"
     return startCode + tagCode + endCode;
@@ -38,18 +38,18 @@ var escapeHTML = (function () {
 
 %>
 
-<section class="fact-box show-fact-box">
+<section class="row">
   <%= factBoxSection("Rating", "Ratings") %>
   <%= factBoxSection("Archive Warning", "Warnings") %>
   <%= fandomSection() %>
   <%= factBoxSection("Relationship", "Relationships") %>
   <%= factBoxSection("Character", "Characters") %>
   <%= factBoxSection("Additional Tag", "Additional") %>
-  <div class="superclass">
-    <div class="column-1">
+  <div>
+    <div class="col-xs-4">
       Stats:
     </div>
-    <div class="column-2">
+    <div class="col-xs-8">
       Published: <% var date = new Date(story.escape("created_at")) %>
       <%= moment(date).format("YYYY[-]MM[-]D") %>
       Words: <%= story.escape("word_count") %>
@@ -58,37 +58,38 @@ var escapeHTML = (function () {
   </div>
 </section>
 
-<section class="title">
-  <header class="title"><%= story.escape("title") %></header>
+<section>
+  <header><h2><%= story.escape("title") %></h2></header>
   <% if (story.get("author")) { %>
-    <h2><a href="javascript:void(0)" class="author-link" data-id="<%= story.get("author").id %>">
+    <h3><a href="javascript:void(0)" class="author-link" data-id="<%= story.get("author").id %>">
       <%= story.escape("author_name") %>
-    </a></h2>
+    </a></h3>
   <% } %>
 </section>
-<aside class="summary">
+<aside class="row">
   <% if (story.escape("summary")) { %>
-    <div class="on-top-of-line">
+    <div class="h4">
       Summary:
     </div>
-    <hr class="story" />
-    <div class="below-line">
+    <hr />
+    <div>
       <%= story.escape("summary") %>
     </div>
   <% } %>
 </aside>
-<aside class="summary">
+<aside class="row">
   <% if (story.escape("notes")) { %>
-    <div class="on-top-of-line">
+    <div class="h4">
       Notes:
     </div>
-    <hr class="story" />
-    <div class="below-line">
+    <hr />
+    <div>
       <%= story.escape("notes") %>
     </div>
   <% } %>
 </aside>
-<article>
+
+<article class="row">
   <%= story.get("text") %>
 </article>
 <button class="top">Top</button>
