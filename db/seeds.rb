@@ -13,9 +13,9 @@ end
 User.create(username: "guest", password: "password")
 
 ratings = ["unrated", "general", "teen", "mature", "explicit"]
-categories = ["Gen", "Male/Male", "Male/Female", "Female/Female", "Other", "Multi"]
+categories = ["British", "American", "German", "Russian", "French", "Other"]
 warnings = ["Creator Chose Not To Use Archive Warnings", "No Archive Warnings Apply",
-"Graphic Depictions of Violence", "Underage"]
+"Graphic Depictions of Violence"]
 
 ratings.each do |rating|
   Tag.create({label: rating, category: "Ratings"})
