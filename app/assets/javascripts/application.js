@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
+//= require jquery-ui/effect-explode
 //= require underscore
 //= require backbone
 //= require archive_of_our_clone

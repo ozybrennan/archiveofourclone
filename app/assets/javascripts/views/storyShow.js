@@ -42,8 +42,13 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
 
   unkudos: function(event){
     event.preventDefault();
+    var that = this;
     var kudos = this.model.get("kudos") - 1;
-    this.model.save({kudos_count: kudos});
+    var button = $(event.currentTarget)
+    button.effect("explode", 500, function(){
+      button.addClass("kudos").removeClass("unkudos");
+      // that.model.save({kudos_count: kudos});
+    })
   },
 
   showTag: function(event){
