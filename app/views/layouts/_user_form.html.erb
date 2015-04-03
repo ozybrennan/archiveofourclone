@@ -15,13 +15,13 @@
   </div>
 <% end %>
 
-<div class="user-form">
-  <form action="<%= action_path %>" method="POST">
-    <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="user[username]" value="<%= @user.username %>">
-    <label for="password">Password</label>
-    <input type="password" id="password" name="user[password]">
-    <input type="submit" value="<%= button_message %>">
-  </form>
-</div>
+<form action="<%= action_path %>" method="POST">
+  <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token">
+  <label for="username">Username</label>
+  <input type="text" id="username" name="user[username]" value="<%= @user.username %>">
+  <label for="password">Password</label>
+  <input type="password" id="password" name="user[password]">
+  <input type="submit" value="<%= button_message %>">
+</form>
+
+<script>$(ArchiveOfOurClone.navbarInitialize);</script>

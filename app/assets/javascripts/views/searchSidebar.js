@@ -63,7 +63,7 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
 
     tags = tags.slice(1)
 
-
+    debugger
     this.collection.set({tagURL: tags, criterionURL: "#search/" + comparator})
     this.collection.fetch({
       data: { page: 1, tags: tags, sortCriterion: comparator }
@@ -71,7 +71,6 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
   },
 
   addTag: function(event) {
-    debugger
     var tag = $(event.currentTarget).serializeJSON().otherTags;
     if (tag) {
       var button = "<button class='tag-delete' data-id ='" + tag.replace(/ /g, "-") + "'>X</button>"

@@ -3,6 +3,7 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
     this.userCollection = new ArchiveOfOurClone.Collections.Users();
+    this.userCollection.fetch();
   },
 
   routes: {

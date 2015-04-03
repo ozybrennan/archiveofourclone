@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new, :destroy]
   resources :users, only: [:show, :index], defaults: { format: :json }
   get 'sessions/guest', to: "sessions#guest"
+  get 'sessions/api/fandoms', to: "api/fandoms#index", defaults: { format: :json }
+  get 'users/api/fandoms', to: 'api/fandoms#index', defaults: { format: :json }
   resource :sessions, only: [:create, :new, :destroy]
 
 end
