@@ -36,8 +36,15 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
 
   leaveKudos: function(event){
     event.preventDefault();
+    var that = this;
     var kudos = this.model.get("kudos") + 1;
-    this.model.save({kudos_count: kudos});
+    var button = $(event.currentTarget)
+    button.hide("explode", 500, function(){
+      button.removeClass("kudos").addClass("unkudos").html("Remove Kudos");
+      button.show("explode", 500, function(){
+        that.model.save({kudos_count: kudos});
+      })
+    })
   },
 
   unkudos: function(event){
@@ -45,9 +52,11 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
     var that = this;
     var kudos = this.model.get("kudos") - 1;
     var button = $(event.currentTarget)
-    button.effect("explode", 500, function(){
-      button.addClass("kudos").removeClass("unkudos");
-      // that.model.save({kudos_count: kudos});
+    button.hide("explode", 500, function(){
+      button.removeClass("unkudos").addClass("kudos").html("Kudos <3");
+      button.show("explode", 500, function(){
+        that.model.save({kudos_count: kudos});
+      })
     })
   },
 

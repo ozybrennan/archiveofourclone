@@ -10,6 +10,7 @@ ArchiveOfOurClone.Views.storyIndexItem = Backbone.View.extend({
     'click a.index-author' : 'showUser',
     'click button.edit': "editStory",
     'click button.delete': "deleteStory",
+    'mouseover a.search-link': "shakeTag",
   },
 
   initialize: function (options) {
@@ -56,5 +57,11 @@ ArchiveOfOurClone.Views.storyIndexItem = Backbone.View.extend({
     event.preventDefault();
     this.model.destroy();
   },
+
+  shakeTag: function(event) {
+    // code buggy, in progress
+    // event.preventDefault();
+    // $(event.currentTarget).effect("bounce", {distance: 1});
+  }
 
 })

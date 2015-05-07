@@ -63,7 +63,6 @@ ArchiveOfOurClone.Views.searchSidebar = Backbone.View.extend({
 
     tags = tags.slice(1)
 
-    debugger
     this.collection.set({tagURL: tags, criterionURL: "#search/" + comparator})
     this.collection.fetch({
       data: { page: 1, tags: tags, sortCriterion: comparator }
