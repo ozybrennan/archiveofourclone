@@ -17,7 +17,7 @@ module Api
         @stories = Story.all
       end
 
-      @stories.sort
+      @stories = Story.sort(@stories, params[:sortCriterion])
 
       @total_works = @stories.length
       @stories = Kaminari.paginate_array(@stories).page(params[:page])

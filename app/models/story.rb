@@ -83,6 +83,19 @@ class Story < ActiveRecord::Base
     tags
   end
 
+  def self.sort(stories, criterion)
+    if criterion == "kudos"
+      sorted_stories = stories.sort_by { |story| story.kudos_count }.reverse
+    elsif criterion == "author_name"
+      sorted_stories = stories.sort_by { |story| story.user.username}
+    elsif criterion == "hits" || criterion == "word_count"
+      sorted_stories = stories.sort_by { |story| story.attributes[criterion] }.reverse
+    else
+      sorted_stories = stories.sort_by { |story| story.attributes[criterion] }
+    end
+    sorted_stories
+  end
+
   def process_attributes(story_params, current_user)
 
     story_attributes = {}
