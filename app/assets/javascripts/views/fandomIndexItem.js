@@ -10,7 +10,7 @@ ArchiveOfOurClone.Views.fandomIndexItem = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.model.fandom.sort(function(a, b) {
+    this.model.get("fandom").sort(function(a, b) {
       if (a.story_count > b.story_count) {
         return -1;
       }

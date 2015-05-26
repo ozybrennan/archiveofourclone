@@ -17,15 +17,7 @@ module Api
         @stories = Story.all
       end
 
-      if params[:sortCriterion] == "kudos"
-        @stories = @stories.sort_by { |story| story.kudos_count }.reverse
-      elsif params[:sortCriterion] == "author_name"
-        @stories = @stories.sort_by { |story| story.user.username}
-      elsif params[:sortCriterion] == "hits" || params[:sortCriterion] == "word_count"
-        @stories = @stories.sort_by { |story| story.attributes[params[:sortCriterion]] }.reverse
-      else
-        @stories = @stories.sort_by { |story| story.attributes[params[:sortCriterion]]}
-      end
+      @stories.sort
 
       @total_works = @stories.length
       @stories = Kaminari.paginate_array(@stories).page(params[:page])

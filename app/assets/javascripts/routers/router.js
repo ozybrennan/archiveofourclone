@@ -96,9 +96,8 @@ ArchiveOfOurClone.Routers.Router = Backbone.Router.extend({
     var collection = new ArchiveOfOurClone.Collections.Categories()
     collection.fetch({
       success: function () {
-        var categories = collection.models[0].get("categories")
-        _(categories).each(function(category){
-          var categoryName = category.category_name
+        collection.each(function(category){
+          var categoryName = category.get("category_name")
           if (name === categoryName) {
             shownCategory = category;
           }

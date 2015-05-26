@@ -1,11 +1,11 @@
 
   <div class="col-xs-4">
-    <h2><a href="javascript:void(0)" class="category-list-name"><%= category.category_name %></a></h2>
+    <h2><a href="javascript:void(0)" class="category-list-name"><%= category.get("category_name") %></a></h2>
     <br />
-    <% var length = category.fandom.length < 5 ? category.fandom.length : 5 %>
+    <% var length = category.get("fandom").length < 5 ? category.get("fandom").length : 5 %>
     <% for (var i = 0; i < length; i++) { %>
       <p>
-      <% var fandom = category.fandom[i] %>
+      <% var fandom = category.get("fandom")[i] %>
       <a href="javascript:void(0)" class="fandom-list-name">
         <%= fandom.name %>
       </a>

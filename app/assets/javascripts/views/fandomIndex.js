@@ -3,11 +3,10 @@ ArchiveOfOurClone.Views.fandomIndex = Backbone.CompositeView.extend({
   template: JST['fandomIndex'],
 
   initialize: function() {
-    this.categories = this.collection.models[0].get("categories")
 
-    _(this.categories).each(function(category){
-      var indexItem = new ArchiveOfOurClone.Views.fandomIndexItem({ model: category})
-      this.addSubview("div.fandom-index", indexItem);
+    this.collection.each(function(model){
+      var indexItem = new ArchiveOfOurClone.Views.fandomIndexItem({ model: model})
+      this.addSubview(".fandom-index", indexItem);
     }.bind(this));
     this.render();
 

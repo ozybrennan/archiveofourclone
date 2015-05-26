@@ -9,8 +9,7 @@ ArchiveOfOurClone.Views.fandomShow = Backbone.View.extend({
   },
 
   initialize: function() {
-    //this.model is not an instance of backbone model; it's an object
-    this.model.fandom.sort(function(a, b){
+    this.model.get("fandom").sort(function(a, b){
       if (a.name < b.name) {
         return -1;
       }
@@ -20,7 +19,7 @@ ArchiveOfOurClone.Views.fandomShow = Backbone.View.extend({
       return 0;
     })
     var alphabet = []
-    _(this.model.fandom).each(function(fandom){
+    _(this.model.get("fandom")).each(function(fandom){
       alphabet.push(fandom.name[0]);
     });
     this.alphabet = _.uniq(alphabet);
