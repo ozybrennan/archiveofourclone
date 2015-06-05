@@ -15,6 +15,7 @@
 //= require jquery-ui/autocomplete
 //= require jquery-ui/effect-explode
 //= require jquery-ui/effect-bounce
+//= require jquery-ui/effect-slide
 //= require underscore
 //= require backbone
 //= require archive_of_our_clone

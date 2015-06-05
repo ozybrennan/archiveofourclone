@@ -1,19 +1,5 @@
 <%
 var factBoxSection = function(name, type) {
-    if (story.get(type) && story.get(type)[0] !== null) {
-      var tags = story.get(type);
-      if (story.get(type).length > 1) {
-        name = name + "s"
-      }
-      var startCode = "<div><div class='col-xs-4'>" + name + ": </div><div class='col-xs-8'>";
-      var endCode = "</div></div>";
-      var tagCode = "";
-      _(tags).each(function(tag){
-        tagCode = tagCode + "<a href='javascript:void(0)' class='search-link " + type + "'>"
-          + escapeHTML(tag) + "</a>" + ", ";
-      });
-      return startCode + tagCode.slice(0, -2) + endCode;
-    }
   }
 
 var fandomSection = function() {
@@ -24,27 +10,11 @@ var fandomSection = function() {
     var tagCode = "<a href='javascript:void(0)' class='search-link fandom_name'>" + fandom + "</a>"
     return startCode + tagCode + endCode;
   }
-}
-
-var escapeHTML = (function () {
-    var chr = {
-        '"': '&quot;', '&': '&amp;', "'": '&#39;',
-        '/': '&#47;',  '<': '&lt;',  '>': '&gt;'
-    };
-    return function (text) {
-      return text.replace(/[\"&'\/<>]/g, function (a) { return chr[a]; });
-    };
-}());
+};
 
 %>
 
 <section class="row">
-  <%= factBoxSection("Rating", "Ratings") %>
-  <%= factBoxSection("Archive Warning", "Warnings") %>
-  <%= fandomSection() %>
-  <%= factBoxSection("Relationship", "Relationships") %>
-  <%= factBoxSection("Character", "Characters") %>
-  <%= factBoxSection("Additional Tag", "Additional") %>
   <div>
     <div class="col-xs-4">
       Stats:
