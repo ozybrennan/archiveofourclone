@@ -4,7 +4,8 @@ ArchiveOfOurClone.Collections.Categories = Backbone.Collection.extend({
   model: ArchiveOfOurClone.Models.Category,
 
   parse: function(response){
-    return response.categories; 
+    this.current_user = response.current_user;
+    return response.categories;
   }
 
 });

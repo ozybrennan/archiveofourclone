@@ -11,12 +11,11 @@ ArchiveOfOurClone.Views.navbar = Backbone.View.extend({
   },
 
   initialize: function () {
-    this.categories = this.collection.models[0]
     this.listenTo(this.collection, "sync", this.render);
   },
 
   render: function(){
-    var content = this.template({categories: this.categories.get("categories"), current_user: this.categories.get("current_user")});
+    var content = this.template({categories: this.collection});
     this.$el.html(content);
     return this;
   },

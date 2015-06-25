@@ -1,7 +1,12 @@
-<div class="row">
-  <div>
-    <a href="javascript:void(0)" class="user main-link"><%= user.escape("username") %></a><br />
-    <a href="javascript:void(0)" class="story-link"><%= user.get("stories").length %> works</a>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a href="javascript:void(0)" class="user main-link panel-title">
+      <%= user.escape("username") %><br>
+    </a>
   </div>
+  <div class="panel-body">
+    <a href="javascript:void(0)" class="story-link">
+      <%= user.get("stories").length %> works
+    </a>
+  <div>
 </div>
-<p>

@@ -15,14 +15,14 @@
         </a>
         <ul class="dropdown-menu" role="menu">
         <li><a href="#" class="genres">All Genres</a></li>
-        <% _(categories).each(function(category) { %>
-            <li><a href="#" class="genre"><%= category.category_name %></a></li>
+        <% categories.each(function(category) { %>
+            <li><a href="#" class="genre"><%= category.get("category_name") %></a></li>
           <% }) %>
         </ul>
       </li>
       <li><a href="#" class="users">Users</a></li>
       <li><a href="#" class="works">Works</a></li>
-      <% if (current_user) { %>
+      <% if (categories.current_user) { %>
         <li><a href="#" class="create">Create Story</a></li>
       <% } %>
     </ul>
