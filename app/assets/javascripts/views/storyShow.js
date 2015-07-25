@@ -27,12 +27,12 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
     }
     var content = this.template({story: this.model})
     this.$el.html(content);
-    var $section = this.$el.children("section.row")
-    $section.prepend(this.factBoxSection("Additional Tag", "Additional"))
-    $section.prepend(this.factBoxSection("Character", "Characters"))
-    $section.prepend(this.factBoxSection("Relationship", "Relationships"))
+    var $section = this.$el.children("table")
+    $section.prepend(this.factBoxSection("Additional Tags", "Additional"))
+    $section.prepend(this.factBoxSection("Characters", "Characters"))
+    $section.prepend(this.factBoxSection("Relationships", "Relationships"))
     $section.prepend(this.fandomSection())
-    $section.prepend(this.factBoxSection("Archive Warning", "Warnings"))
+    $section.prepend(this.factBoxSection("Archive Warnings", "Warnings"))
     $section.prepend(this.factBoxSection("Rating", "Ratings"))
     return this;
   },
@@ -84,31 +84,32 @@ ArchiveOfOurClone.Views.storyShow = Backbone.View.extend({
   factBoxSection : function(name, type) {
     if (this.model.get(type) && this.model.get(type)[0] !== null) {
       var tags = this.model.get(type);
-      if (this.model.get(type).length > 1) {
-        name = name + "s"
-      }
-      var $name = $("<div>").addClass("col-xs-4").html(name)
-      var $tags = $("<div>").addClass("col-xs-8")
-      _(tags).each(function(tag){
-        var $tag = $("<a>").addClass("search-link").addClass(type)
-        $tag.attr("href", "javascript:void(0)")
-        $tag.html(tag + ", ")
+      var $name = $("<th>").html(name);
+      var $tags = $("<td>");
+      _(tags).each(function(tag, index){
+        var $tag = $("<a>").addClass("search-link").addClass(type);
+        $tag.attr("href", "javascript:void(0)");
+        if (index < tags.length - 1) {
+          $tag.html(tag + ", ");
+        } else {
+          $tag.html(tag);
+        }
         $tags.append($tag)
       });
-      var section = $("<div>").append($name).append($tags);
+      var section = $("<tr>").append($name).append($tags);
       return section;
     }
   },
 
   fandomSection : function(){
     if (this.model.get("fandom_name")) {
-      var $name = $("<div>").addClass("col-xs-4").html("Fandom")
-      var $tags = $("<div>").addClass("col-xs-8")
+      var $name = $("<th>").html("Fandom")
+      var $tags = $("<td>")
       var $tag = $("<a>").addClass("search-link").addClass("fandom")
       $tag.attr("href", "javascript:void(0)")
       $tag.html(this.model.get("fandom_name"))
       $tags.append($tag)
-      var section = $("<div>").append($name).append($tags);
+      var section = $("<tr>").append($name).append($tags);
       return section;
     }
   }

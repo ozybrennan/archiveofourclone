@@ -1,32 +1,17 @@
-<%
-var factBoxSection = function(name, type) {
-  }
-
-var fandomSection = function() {
-  if (story.get("fandom_name")) {
-    var fandom = story.escape("fandom_name");
-    var startCode = "<div><div class='col-xs-4'>Fandom: </div><div class='col-xs-8'>";
-    var endCode = "</div></div>";
-    var tagCode = "<a href='javascript:void(0)' class='search-link fandom_name'>" + fandom + "</a>"
-    return startCode + tagCode + endCode;
-  }
-};
-
-%>
-
-<section class="row">
-  <div>
-    <div class="col-xs-4">
-      Stats:
-    </div>
-    <div class="col-xs-8">
+<p></p>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>
+      Stats
+    </th>
+    <td>
       Published: <% var date = new Date(story.escape("created_at")) %>
       <%= moment(date).format("YYYY[-]MM[-]D") %>
       Words: <%= story.escape("word_count") %>
       Hits: <%= story.escape("hits") %>
-    </div>
-  </div>
-</section>
+    </td>
+  </tr>
+</table>
 
 <section>
   <header><h2><%= story.escape("title") %></h2></header>
